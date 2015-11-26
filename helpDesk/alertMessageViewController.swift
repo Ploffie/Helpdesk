@@ -9,6 +9,9 @@
 import UIKit
 
 class allertMessageViewController: UIViewController {
+    
+    // Nothing to program so all generated
+    
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
     @IBOutlet var alertMessagesTableView: UITableView!

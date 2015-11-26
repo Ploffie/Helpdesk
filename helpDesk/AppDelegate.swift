@@ -10,6 +10,8 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    // Generated code, apart from code within functions and let values
 
     var window: UIWindow?
     let defaultData = NSUserDefaults.standardUserDefaults()

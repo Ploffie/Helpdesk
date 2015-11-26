@@ -10,6 +10,9 @@ import UIKit
 
 public class loginPortalViewController: UIViewController {
     
+    // All programmed apart from function handleLogin, which will be moved to general Helpdesk file soon
+    // handleLogin function was, however, created manually
+    
     private let dbURL:String = "http://wybren.haptotherapie-twente.nl/jsonlogin2.php"
     
     @IBOutlet weak var menuButton: UIBarButtonItem!

@@ -9,6 +9,9 @@
 import UIKit
 
 class registerViewController: UIViewController {
+    
+    // All programmed apart from database connection/HTML protocol, which is customised
+    
     @IBOutlet weak var usernameTextfield: UITextField!
     
     @IBOutlet weak var passwordTextfield: UITextField!

@@ -9,6 +9,8 @@
 import UIKit
 
 class protectedPageViewController: UIViewController {
+    
+    // All programmed
    
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var userNameLabel: UILabel!

@@ -10,6 +10,8 @@ import UIKit
 
 class newsViewController: UIViewController {
     
+    // All generated
+    
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
 

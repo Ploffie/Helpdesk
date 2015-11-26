@@ -10,6 +10,7 @@ import UIKit
 
 class protectedTableViewController: UITableViewController {
  
+    // All generated apart from function signOutButton, which will be moved to general Helpdesk file soon
 
     override func viewDidLoad() {
         super.viewDidLoad()

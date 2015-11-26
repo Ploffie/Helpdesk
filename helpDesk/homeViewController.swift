@@ -9,6 +9,8 @@
 import UIKit
 
 class homeViewController: UIViewController {
+    
+    // Nothing to program so all generated
 
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
