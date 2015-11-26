@@ -6,6 +6,15 @@
 //  Copyright © 2015 Amerion IT. All rights reserved.
 //
 
+/* 
+ * TODO:
+ *
+ * Optimise memory usage, create one alertView and customise later
+ * Instead of defining a new one every time
+ *
+ * Textfield function editingDidEnd should call function handleLogin()
+ */
+
 import UIKit
 
 public class loginPortalViewController: UIViewController {
@@ -44,7 +53,7 @@ public class loginPortalViewController: UIViewController {
         
         if ( username.isEqualToString("") || password.isEqualToString("") ) {
             
-            let alertView:UIAlertView = UIAlertView()
+            let alertView:UIAlertView = UIAlertView() // Deprecated
             alertView.title = "Sign in Failed!"
             alertView.message = "Please enter Username and Password"
             alertView.delegate = self
@@ -82,7 +91,7 @@ public class loginPortalViewController: UIViewController {
             
             var urlData: NSData?
             do {
-                urlData = try NSURLConnection.sendSynchronousRequest(request, returningResponse:&response)
+                urlData = try NSURLConnection.sendSynchronousRequest(request, returningResponse:&response) // Deprecated
             } catch let error as NSError {
                 reponseError = error
                 urlData = nil
@@ -131,7 +140,7 @@ public class loginPortalViewController: UIViewController {
                         } else {
                             error_msg = "Unknown Error"
                         }
-                        let alertView:UIAlertView = UIAlertView()
+                        let alertView:UIAlertView = UIAlertView() // Deprecated
                         alertView.title = "Sign in Failed!"
                         alertView.message = error_msg as String
                         alertView.delegate = self
@@ -141,7 +150,7 @@ public class loginPortalViewController: UIViewController {
                     }
                     
                 } else {
-                    let alertView:UIAlertView = UIAlertView()
+                    let alertView:UIAlertView = UIAlertView() // Deprecated
                     alertView.title = "Sign in Failed!"
                     alertView.message = "Connection Failed"
                     alertView.delegate = self
@@ -149,7 +158,7 @@ public class loginPortalViewController: UIViewController {
                     alertView.show()
                 }
             } else {
-                let alertView:UIAlertView = UIAlertView()
+                let alertView:UIAlertView = UIAlertView() // Deprecated
                 alertView.title = "Sign in Failed!"
                 alertView.message = "Connection Failure"
                 if let error = reponseError {
@@ -160,7 +169,7 @@ public class loginPortalViewController: UIViewController {
                 alertView.show()
             }
         } catch {
-            let alertView:UIAlertView = UIAlertView()
+            let alertView:UIAlertView = UIAlertView() // Deprecated
             alertView.title = "Sign in Failed!"
             alertView.message = "Server Error"
             alertView.delegate = self

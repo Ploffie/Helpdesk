@@ -6,6 +6,14 @@
 //  Copyright © 2015 Amerion IT. All rights reserved.
 //
 
+/*
+ * TODO:
+ *
+ * Save user credentials onto iPhone/iPad memory
+ * Log in again as soon as user re-opens app
+ * And set initial view controller as protected view controller
+ */
+
 import UIKit
 
 @UIApplicationMain

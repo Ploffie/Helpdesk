@@ -6,6 +6,13 @@
 //  Copyright © 2015 Amerion IT. All rights reserved.
 //
 
+/*
+ * TODO:
+ *
+ * Create public function to sign out
+ * Use this function in protected table view sign out button
+ */
+
 import UIKit
 
 class protectedPageViewController: UIViewController {
@@ -18,7 +25,7 @@ class protectedPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the vi
+        // Do any additional setup after loading the view
         
         if self.revealViewController() != nil {
             menuButton.target = self.revealViewController()

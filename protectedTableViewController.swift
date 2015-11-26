@@ -6,11 +6,17 @@
 //  Copyright © 2015 Amerion IT. All rights reserved.
 //
 
+/*
+ * TODO:
+ *
+ * Create seperate, public class for func signOutButton
+ */
+
 import UIKit
 
 class protectedTableViewController: UITableViewController {
  
-    // All generated apart from function signOutButton, which will be moved to general Helpdesk file soon
+    // All generated apart from function signOutButton
 
     override func viewDidLoad() {
         super.viewDidLoad()

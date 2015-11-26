@@ -6,6 +6,12 @@
 //  Copyright © 2015 Amerion IT. All rights reserved.
 //
 
+/*
+ * TODO:
+ *
+ * Remove this, should be done from control panel
+ */
+
 import UIKit
 
 class registerViewController: UIViewController {
@@ -36,7 +42,7 @@ class registerViewController: UIViewController {
         
         if ( username.isEqualToString("") || password.isEqualToString("") ) {
             
-            let alertView:UIAlertView = UIAlertView()
+            let alertView:UIAlertView = UIAlertView() // Deprecated
             alertView.title = "Sign Up Failed!"
             alertView.message = "Please enter Username and Password"
             alertView.delegate = self
@@ -44,7 +50,7 @@ class registerViewController: UIViewController {
             alertView.show()
         } else if ( !password.isEqual(confirm_password) ) {
             
-            let alertView:UIAlertView = UIAlertView()
+            let alertView:UIAlertView = UIAlertView() // Deprecated
             alertView.title = "Sign Up Failed!"
             alertView.message = "Passwords doesn't Match"
             alertView.delegate = self
@@ -70,13 +76,12 @@ class registerViewController: UIViewController {
                 request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
                 request.setValue("application/json", forHTTPHeaderField: "Accept")
                 
-                
-                var reponseError: NSError?
+                var reponseError: NSError? // Deprecated
                 var response: NSURLResponse?
                 
                 var urlData: NSData?
                 do {
-                    urlData = try NSURLConnection.sendSynchronousRequest(request, returningResponse:&response)
+                    urlData = try NSURLConnection.sendSynchronousRequest(request, returningResponse:&response) // Deprecated
                 } catch let error as NSError {
                     reponseError = error
                     urlData = nil
@@ -116,7 +121,7 @@ class registerViewController: UIViewController {
                             } else {
                                 error_msg = "Unknown Error"
                             }
-                            let alertView:UIAlertView = UIAlertView()
+                            let alertView:UIAlertView = UIAlertView() // Deprecated
                             alertView.title = "Sign Up Failed!"
                             alertView.message = error_msg as String
                             alertView.delegate = self
@@ -126,7 +131,7 @@ class registerViewController: UIViewController {
                         }
                         
                     } else {
-                        let alertView:UIAlertView = UIAlertView()
+                        let alertView:UIAlertView = UIAlertView() // Deprecated
                         alertView.title = "Sign Up Failed!"
                         alertView.message = "Connection Failed"
                         alertView.delegate = self
@@ -134,7 +139,7 @@ class registerViewController: UIViewController {
                         alertView.show()
                     }
                 }  else {
-                    let alertView:UIAlertView = UIAlertView()
+                    let alertView:UIAlertView = UIAlertView() // Deprecated
                     alertView.title = "Sign in Failed!"
                     alertView.message = "Connection Failure"
                     if let error = reponseError {
@@ -145,7 +150,7 @@ class registerViewController: UIViewController {
                     alertView.show()
                 }
             } catch {
-                let alertView:UIAlertView = UIAlertView()
+                let alertView:UIAlertView = UIAlertView() // Deprecated
                 alertView.title = "Sign Up Failed!"
                 alertView.message = "Server Error!"
                 alertView.delegate = self
