@@ -12,10 +12,25 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let defaultData = NSUserDefaults.standardUserDefaults()
+    let loginControllerClass = loginPortalViewController()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
         // Override point for customization after application launch.
+        defaultData.setValue("Username", forKey: "admin")
+        defaultData.setValue("Password", forKey: "password")
+        let username = defaultData.stringForKey("Username")
+        let password = defaultData.stringForKey("Password")
+        if(defaultData.objectForKey("Username") == nil ||
+            defaultData.objectForKey("Password") == nil) {
+            print("Missing value for username/password, not logging in") // DEBUG
+            // Do nothing
+        } else {
+            print("Username and password are available, attempting login") // DEBUG
+            loginControllerClass.handleLogin(username!, password: password!)
+        }
+        
         return true
     }
 
