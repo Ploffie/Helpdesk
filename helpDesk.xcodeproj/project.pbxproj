@@ -21,6 +21,7 @@
 		86EE01E21BF8C9BF004BAFF5 /* protectedPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EE01E11BF8C9BF004BAFF5 /* protectedPageViewController.swift */; };
 		86EE01E41BF8CAB6004BAFF5 /* loginPortalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EE01E31BF8CAB6004BAFF5 /* loginPortalViewController.swift */; };
 		86EE01E61BF8E049004BAFF5 /* registerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EE01E51BF8E049004BAFF5 /* registerViewController.swift */; };
+		F420DB671C0795EF00F107F7 /* ico in Resources */ = {isa = PBXBuildFile; fileRef = F420DB661C0795EE00F107F7 /* ico */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		86EE01E11BF8C9BF004BAFF5 /* protectedPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = protectedPageViewController.swift; path = ../protectedPageViewController.swift; sourceTree = "<group>"; };
 		86EE01E31BF8CAB6004BAFF5 /* loginPortalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginPortalViewController.swift; sourceTree = "<group>"; };
 		86EE01E51BF8E049004BAFF5 /* registerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = registerViewController.swift; sourceTree = "<group>"; };
+		F420DB661C0795EE00F107F7 /* ico */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ico; path = ../../helpDesk/helpDesk/ico; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 		8640FBA51BEA7C5D004EDEA5 /* helpDesk */ = {
 			isa = PBXGroup;
 			children = (
+				F420DB661C0795EE00F107F7 /* ico */,
 				8640FBD41BEA7C65004EDEA5 /* SWRevealViewController */,
 				8640FBA61BEA7C5D004EDEA5 /* AppDelegate.swift */,
 				864689D11BFA4D7100421BBC /* protectedTableViewController.swift */,
@@ -268,6 +271,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F420DB671C0795EF00F107F7 /* ico in Resources */,
 				8640FBAE1BEA7C5D004EDEA5 /* Assets.xcassets in Resources */,
 				8640FBAC1BEA7C5D004EDEA5 /* Main.storyboard in Resources */,
 			);

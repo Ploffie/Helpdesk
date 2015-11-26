@@ -45,7 +45,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Amerion IT" id="VY2-Wa-2ya">
-                        <barButtonItem key="leftBarButtonItem" title="Item" style="done" id="Oa9-N7-bmu">
+                        <barButtonItem key="leftBarButtonItem" image="List.png" style="done" id="Oa9-N7-bmu">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
                     </navigationItem>
@@ -203,7 +203,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Nieuws" id="1Fl-MS-oBz">
-                        <barButtonItem key="leftBarButtonItem" title="Item" style="done" id="yxL-Lw-eQb">
+                        <barButtonItem key="leftBarButtonItem" image="List.png" style="done" id="yxL-Lw-eQb">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
                     </navigationItem>
@@ -363,10 +363,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="User Portal" id="K61-OM-4NZ">
-                        <barButtonItem key="leftBarButtonItem" title="Item" style="done" id="eql-CR-eOf">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" style="done" id="s6I-fN-gEJ">
+                        <barButtonItem key="leftBarButtonItem" image="List.png" style="done" id="eql-CR-eOf">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
                     </navigationItem>
@@ -734,7 +731,7 @@
                         <sections/>
                     </tableView>
                     <navigationItem key="navigationItem" title="Alert Messages" id="sfs-mR-3lu">
-                        <barButtonItem key="leftBarButtonItem" title="Item" style="done" id="aPX-Hu-5gf">
+                        <barButtonItem key="leftBarButtonItem" image="List.png" style="done" id="aPX-Hu-5gf">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
                     </navigationItem>
@@ -888,7 +885,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="Vqg-fT-K1V">
-                        <barButtonItem key="leftBarButtonItem" title="Item" style="done" id="2d0-PM-Bn4">
+                        <barButtonItem key="leftBarButtonItem" image="List.png" style="done" id="2d0-PM-Bn4">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
                     </navigationItem>
@@ -1117,6 +1114,9 @@
             <point key="canvasLocation" x="5598" y="2030"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="List.png" width="30" height="20"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ogZ-T3-IuK"/>
         <segue reference="NcR-hi-WEd"/>
