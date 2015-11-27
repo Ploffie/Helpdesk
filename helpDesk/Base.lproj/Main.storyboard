@@ -815,6 +815,9 @@
                                         <include reference="5YO-Td-KS5"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="passwordDidEndOnExit:" destination="cSP-5Z-q4U" eventType="editingDidEndOnExit" id="4dE-Eh-4OU"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <animations/>

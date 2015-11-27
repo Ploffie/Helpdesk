@@ -11,8 +11,6 @@
  *
  * Optimise memory usage, create one alertView and customise later
  * Instead of defining a new one every time
- *
- * Textfield function editingDidEnd should call function handleLogin()
  */
 
 import UIKit
@@ -53,17 +51,20 @@ public class loginPortalViewController: UIViewController {
         
         if ( username.isEqualToString("") || password.isEqualToString("") ) {
             
-            let alertView:UIAlertView = UIAlertView() // Deprecated
-            alertView.title = "Sign in Failed!"
-            alertView.message = "Please enter Username and Password"
-            alertView.delegate = self
-            alertView.addButtonWithTitle("OK")
-            alertView.show()
+            let alertView:UIAlertController = UIAlertController(title: "Sign in failed", message: "Please enter username and password", preferredStyle: .Alert)
+            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
+            alertView.addAction(OKAction)
+            self.presentViewController(alertView, animated: true, completion: nil)
         } else {
             handleLogin(username, password: password)
         }
         
     }
+    
+    @IBAction func passwordDidEndOnExit(sender: UITextField) {
+        handleLogin(usernameTextfield.text!, password: passwordTextfield.text!)
+    }
+    
     
     public func handleLogin(username: NSString, password: NSString) -> Void {
         
@@ -140,41 +141,35 @@ public class loginPortalViewController: UIViewController {
                         } else {
                             error_msg = "Unknown Error"
                         }
-                        let alertView:UIAlertView = UIAlertView() // Deprecated
-                        alertView.title = "Sign in Failed!"
-                        alertView.message = error_msg as String
-                        alertView.delegate = self
-                        alertView.addButtonWithTitle("OK")
-                        alertView.show()
+                        let alertView:UIAlertController = UIAlertController(title: "Sign in failed", message: error_msg as String, preferredStyle: .Alert)
+                        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
+                        alertView.addAction(OKAction)
+                        self.presentViewController(alertView, animated: true, completion: nil)
                         
                     }
                     
                 } else {
-                    let alertView:UIAlertView = UIAlertView() // Deprecated
-                    alertView.title = "Sign in Failed!"
-                    alertView.message = "Connection Failed"
-                    alertView.delegate = self
-                    alertView.addButtonWithTitle("OK")
-                    alertView.show()
+                    let alertView:UIAlertController = UIAlertController(title: "Sign in failed", message: "Connection failed", preferredStyle: .Alert)
+                    let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
+                    alertView.addAction(OKAction)
+                    self.presentViewController(alertView, animated: true, completion: nil)
+
                 }
             } else {
-                let alertView:UIAlertView = UIAlertView() // Deprecated
-                alertView.title = "Sign in Failed!"
-                alertView.message = "Connection Failure"
+                let alertView:UIAlertController = UIAlertController(title: "Sign in failed", message: "Connection failure", preferredStyle: .Alert)
                 if let error = reponseError {
                     alertView.message = (error.localizedDescription)
                 }
-                alertView.delegate = self
-                alertView.addButtonWithTitle("OK")
-                alertView.show()
+                let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
+                alertView.addAction(OKAction)
+                self.presentViewController(alertView, animated: true, completion: nil)
+
             }
         } catch {
-            let alertView:UIAlertView = UIAlertView() // Deprecated
-            alertView.title = "Sign in Failed!"
-            alertView.message = "Server Error"
-            alertView.delegate = self
-            alertView.addButtonWithTitle("OK")
-            alertView.show()
+            let alertView:UIAlertController = UIAlertController(title: "Sign in failed", message: "Server error", preferredStyle: .Alert)
+            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
+            alertView.addAction(OKAction)
+            self.presentViewController(alertView, animated: true, completion: nil)
         }
     }
 }

@@ -9,7 +9,7 @@
 /*
  * TODO:
  *
- * Create seperate, public class for func signOutButton
+ * Make func signOutButton public
  */
 
 import UIKit
