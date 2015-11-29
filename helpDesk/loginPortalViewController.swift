@@ -51,7 +51,7 @@ public class loginPortalViewController: UIViewController {
         
         if ( username.isEqualToString("") || password.isEqualToString("") ) {
             
-            let alertView:UIAlertController = UIAlertController(title: "Sign in failed", message: "Please enter username and password", preferredStyle: .Alert)
+            let alertView:UIAlertController = UIAlertController(title: "Inloggen mislukt", message: "Vul a.u.b. een gebruikersnaam en wachtwoord in.", preferredStyle: .Alert)
             let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
             alertView.addAction(OKAction)
             self.presentViewController(alertView, animated: true, completion: nil)
@@ -63,6 +63,15 @@ public class loginPortalViewController: UIViewController {
     
     @IBAction func passwordDidEndOnExit(sender: UITextField) {
         handleLogin(usernameTextfield.text!, password: passwordTextfield.text!)
+    }
+
+    @IBAction func signUpButton(sender: UIButton) {
+        
+        let alertView:UIAlertController = UIAlertController(title: "Registreren", message: "Neem contact op met Amerion IT om te registreren.", preferredStyle: .Alert)
+        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
+        alertView.addAction(OKAction)
+        self.presentViewController(alertView, animated: true, completion: nil)
+        
     }
     
     
@@ -139,9 +148,9 @@ public class loginPortalViewController: UIViewController {
                         if jsonData["error_message"] as? NSString != nil {
                             error_msg = jsonData["error_message"] as! NSString
                         } else {
-                            error_msg = "Unknown Error"
+                            error_msg = "Er is een fout opgetreden, probeer het later opnieuw."
                         }
-                        let alertView:UIAlertController = UIAlertController(title: "Sign in failed", message: error_msg as String, preferredStyle: .Alert)
+                        let alertView:UIAlertController = UIAlertController(title: "Inloggen mislukt", message: error_msg as String, preferredStyle: .Alert)
                         let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
                         alertView.addAction(OKAction)
                         self.presentViewController(alertView, animated: true, completion: nil)
@@ -149,14 +158,14 @@ public class loginPortalViewController: UIViewController {
                     }
                     
                 } else {
-                    let alertView:UIAlertController = UIAlertController(title: "Sign in failed", message: "Connection failed", preferredStyle: .Alert)
+                    let alertView:UIAlertController = UIAlertController(title: "Inloggen mislukt", message: "Er is een fout opgetreden (foutcode i01).", preferredStyle: .Alert)
                     let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
                     alertView.addAction(OKAction)
                     self.presentViewController(alertView, animated: true, completion: nil)
 
                 }
             } else {
-                let alertView:UIAlertController = UIAlertController(title: "Sign in failed", message: "Connection failure", preferredStyle: .Alert)
+                let alertView:UIAlertController = UIAlertController(title: "Inloggen mislukt", message: "Er is een fout opgetreden (foutcode i02).", preferredStyle: .Alert)
                 if let error = reponseError {
                     alertView.message = (error.localizedDescription)
                 }
@@ -166,7 +175,7 @@ public class loginPortalViewController: UIViewController {
 
             }
         } catch {
-            let alertView:UIAlertController = UIAlertController(title: "Sign in failed", message: "Server error", preferredStyle: .Alert)
+            let alertView:UIAlertController = UIAlertController(title: "Inloggen mislukt", message: "Er is een fout opgetreden (foutcode i03).", preferredStyle: .Alert)
             let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
             alertView.addAction(OKAction)
             self.presentViewController(alertView, animated: true, completion: nil)

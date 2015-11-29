@@ -20,7 +20,6 @@
 		864689D21BFA4D7100421BBC /* protectedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864689D11BFA4D7100421BBC /* protectedTableViewController.swift */; };
 		86EE01E21BF8C9BF004BAFF5 /* protectedPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EE01E11BF8C9BF004BAFF5 /* protectedPageViewController.swift */; };
 		86EE01E41BF8CAB6004BAFF5 /* loginPortalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EE01E31BF8CAB6004BAFF5 /* loginPortalViewController.swift */; };
-		86EE01E61BF8E049004BAFF5 /* registerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EE01E51BF8E049004BAFF5 /* registerViewController.swift */; };
 		F420DB671C0795EF00F107F7 /* ico in Resources */ = {isa = PBXBuildFile; fileRef = F420DB661C0795EE00F107F7 /* ico */; };
 /* End PBXBuildFile section */
 
@@ -63,7 +62,6 @@
 		864689D11BFA4D7100421BBC /* protectedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = protectedTableViewController.swift; path = ../protectedTableViewController.swift; sourceTree = "<group>"; };
 		86EE01E11BF8C9BF004BAFF5 /* protectedPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = protectedPageViewController.swift; path = ../protectedPageViewController.swift; sourceTree = "<group>"; };
 		86EE01E31BF8CAB6004BAFF5 /* loginPortalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginPortalViewController.swift; sourceTree = "<group>"; };
-		86EE01E51BF8E049004BAFF5 /* registerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = registerViewController.swift; sourceTree = "<group>"; };
 		F420DB661C0795EE00F107F7 /* ico */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ico; path = ../../helpDesk/helpDesk/ico; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,7 +119,6 @@
 				864689D11BFA4D7100421BBC /* protectedTableViewController.swift */,
 				8640FBA81BEA7C5D004EDEA5 /* ViewController.swift */,
 				8640FBAA1BEA7C5D004EDEA5 /* Main.storyboard */,
-				86EE01E51BF8E049004BAFF5 /* registerViewController.swift */,
 				86EE01E31BF8CAB6004BAFF5 /* loginPortalViewController.swift */,
 				86EE01E11BF8C9BF004BAFF5 /* protectedPageViewController.swift */,
 				8640FBD91BEAA13E004EDEA5 /* newsViewController.swift */,
@@ -246,7 +243,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8640FB9E1BEA7C5D004EDEA5 /* Build configuration list for PBXProject "Helpdesk" */;
+			buildConfigurationList = 8640FB9E1BEA7C5D004EDEA5 /* Build configuration list for PBXProject "helpDesk" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -303,7 +300,6 @@
 				864689D21BFA4D7100421BBC /* protectedTableViewController.swift in Sources */,
 				864689CC1BFA4B1600421BBC /* alertMessageViewController.swift in Sources */,
 				8640FBD81BEA7C86004EDEA5 /* SWRevealViewController.m in Sources */,
-				86EE01E61BF8E049004BAFF5 /* registerViewController.swift in Sources */,
 				86EE01E41BF8CAB6004BAFF5 /* loginPortalViewController.swift in Sources */,
 				8640FBDC1BEAA2F4004EDEA5 /* homeViewController.swift in Sources */,
 				86EE01E21BF8C9BF004BAFF5 /* protectedPageViewController.swift in Sources */,
@@ -523,7 +519,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8640FB9E1BEA7C5D004EDEA5 /* Build configuration list for PBXProject "Helpdesk" */ = {
+		8640FB9E1BEA7C5D004EDEA5 /* Build configuration list for PBXProject "helpDesk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8640FBC91BEA7C5D004EDEA5 /* Debug */,

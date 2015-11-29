@@ -28,8 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         // Override point for customization after application launch.
-        defaultData.setValue("Username", forKey: "admin")
-        defaultData.setValue("Password", forKey: "password")
+        defaultData.setValue("Username", forKey: "admin") // DEBUG
+        defaultData.setValue("Password", forKey: "password") // DEBUG
         let username = defaultData.stringForKey("Username")
         let password = defaultData.stringForKey("Password")
         if(defaultData.objectForKey("Username") == nil ||
