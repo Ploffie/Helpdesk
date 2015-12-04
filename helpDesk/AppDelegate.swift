@@ -9,9 +9,7 @@
 /*
  * TODO:
  *
- * Save user credentials onto iPhone/iPad memory
- * Log in again as soon as user re-opens app
- * And set initial view controller as protected view controller
+ * Nothing so far
  */
 
 import UIKit
@@ -19,7 +17,7 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    // Generated code, apart from code within functions and let values
+    // Mostly programmed manually, apart from empty functions
 
     var window: UIWindow?
     let defaultData = NSUserDefaults.standardUserDefaults()
@@ -28,17 +26,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         // Override point for customization after application launch.
-        defaultData.setValue("Username", forKey: "admin") // DEBUG
-        defaultData.setValue("Password", forKey: "password") // DEBUG
         let username = defaultData.stringForKey("Username")
         let password = defaultData.stringForKey("Password")
         if(defaultData.objectForKey("Username") == nil ||
             defaultData.objectForKey("Password") == nil) {
-            print("Missing value for username/password, not logging in") // DEBUG
-            // Do nothing
+            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("unprotectedEntryPoint") as! SWRevealViewController
+            self.window?.rootViewController = exampleViewController
+            self.window?.makeKeyAndVisible()
+            return true
         } else {
-            print("Username and password are available, attempting login") // DEBUG
-            loginControllerClass.handleLogin(username!, password: password!)
+            if(loginControllerClass.handleLogin(username!, password: password!) == true) {
+                self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("protectedEntryPoint") as! SWRevealViewController
+                self.window?.rootViewController = exampleViewController
+                self.window?.makeKeyAndVisible()
+                return true
+            }
         }
         
         return true

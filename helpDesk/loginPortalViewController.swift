@@ -11,14 +11,18 @@
  *
  * Optimise memory usage, create one alertView and customise later
  * Instead of defining a new one every time
+ *
+ * Optimisation, handle login return statement outside of
+ * handleLogin function but in login class instead
+ *
+ * Ask whether user wants to save credentials or not
  */
 
 import UIKit
 
 public class loginPortalViewController: UIViewController {
     
-    // All programmed apart from function handleLogin, which will be moved to general Helpdesk file soon
-    // handleLogin function was, however, created manually
+    // All programmed
     
     private let dbURL:String = "http://wybren.haptotherapie-twente.nl/jsonlogin2.php"
     
@@ -56,7 +60,9 @@ public class loginPortalViewController: UIViewController {
             alertView.addAction(OKAction)
             self.presentViewController(alertView, animated: true, completion: nil)
         } else {
-            handleLogin(username, password: password)
+            if(handleLogin(username, password: password) == true) {
+                self.performSegueWithIdentifier("goto_protected", sender: self)
+            }
         }
         
     }
@@ -74,8 +80,7 @@ public class loginPortalViewController: UIViewController {
         
     }
     
-    
-    public func handleLogin(username: NSString, password: NSString) -> Void {
+    public func handleLogin(username: NSString, password: NSString) -> Bool {
         
         do {
             let post:NSString = "username=\(username)&password=\(password)"
@@ -138,10 +143,12 @@ public class loginPortalViewController: UIViewController {
                         prefs.setInteger(1, forKey: "ISLOGGEDIN")
                         prefs.synchronize()
                         
-                        defaultData.setObject(username, forKey: "standardUser")
-                        defaultData.setObject(password, forKey: "standardPass")
+                        defaultData.setObject(username, forKey: "Username")
+                        defaultData.setObject(password, forKey: "Password")
+                        defaultData.synchronize()
                         
-                        self.performSegueWithIdentifier("goto_login", sender: self)
+                        return true
+                        
                     } else {
                         var error_msg:NSString
                         
@@ -155,6 +162,7 @@ public class loginPortalViewController: UIViewController {
                         alertView.addAction(OKAction)
                         self.presentViewController(alertView, animated: true, completion: nil)
                         
+                        return false
                     }
                     
                 } else {
@@ -162,7 +170,8 @@ public class loginPortalViewController: UIViewController {
                     let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
                     alertView.addAction(OKAction)
                     self.presentViewController(alertView, animated: true, completion: nil)
-
+                    
+                    return false
                 }
             } else {
                 let alertView:UIAlertController = UIAlertController(title: "Inloggen mislukt", message: "Er is een fout opgetreden (foutcode i02).", preferredStyle: .Alert)
@@ -172,7 +181,8 @@ public class loginPortalViewController: UIViewController {
                 let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
                 alertView.addAction(OKAction)
                 self.presentViewController(alertView, animated: true, completion: nil)
-
+                
+                return false
             }
         } catch {
             let alertView:UIAlertController = UIAlertController(title: "Inloggen mislukt", message: "Er is een fout opgetreden (foutcode i03).", preferredStyle: .Alert)
@@ -180,6 +190,7 @@ public class loginPortalViewController: UIViewController {
             alertView.addAction(OKAction)
             self.presentViewController(alertView, animated: true, completion: nil)
         }
+        return false
     }
 }
 
