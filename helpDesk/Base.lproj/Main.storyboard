@@ -313,6 +313,7 @@
                                 </variation>
                                 <connections>
                                     <action selector="signOutTapped:" destination="CjM-Nb-4g6" eventType="touchUpInside" id="lFT-KS-Q3Z"/>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" customClass="SWRevealViewControllerSeguePushController" modalTransitionStyle="coverVertical" id="jw1-0z-Can"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -375,7 +376,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0dO-eI-DuB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6303" y="1199"/>
+            <point key="canvasLocation" x="6327" y="1199"/>
         </scene>
         <!--Reveal View Controller-->
         <scene sceneID="Fsf-CI-C4j">
@@ -916,7 +917,7 @@
                         <outlet property="menuButton" destination="2d0-PM-Bn4" id="KeK-nF-6kJ"/>
                         <outlet property="passwordTextfield" destination="GY9-hv-VU8" id="MfP-Om-Bia"/>
                         <outlet property="usernameTextfield" destination="aAM-vc-b8p" id="FAl-3Q-mIZ"/>
-                        <segue destination="Tqr-8s-8bt" kind="presentation" identifier="goto_protected" customClass="SWRevealViewControllerSegueSetController" id="NBT-hg-hTJ"/>
+                        <segue destination="Tqr-8s-8bt" kind="presentation" identifier="goto_protected" id="NBT-hg-hTJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ysT-Vc-PNG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -992,7 +993,7 @@
         <image name="List.png" width="30" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="k3c-W5-Jv4"/>
-        <segue reference="GZX-Vp-pUE"/>
+        <segue reference="NcR-hi-WEd"/>
+        <segue reference="ogZ-T3-IuK"/>
     </inferredMetricsTieBreakers>
 </document>

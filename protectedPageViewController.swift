@@ -22,6 +22,7 @@ class protectedPageViewController: UIViewController {
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var userNameLabel: UILabel!
     
+    let defaultData = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,8 +56,10 @@ class protectedPageViewController: UIViewController {
     @IBAction func signOutTapped(sender: UIButton) {
         let appDomain = NSBundle.mainBundle().bundleIdentifier
         NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
+        defaultData.removeObjectForKey("Username")
+        defaultData.removeObjectForKey("Password")
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        
     }
     
     

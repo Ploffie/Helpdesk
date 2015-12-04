@@ -60,15 +60,15 @@ public class loginPortalViewController: UIViewController {
             alertView.addAction(OKAction)
             self.presentViewController(alertView, animated: true, completion: nil)
         } else {
-            if(handleLogin(username, password: password) == true) {
-                self.performSegueWithIdentifier("goto_protected", sender: self)
-            }
+            handleLogin(username, password: password)
+            self.performSegueWithIdentifier("goto_protected", sender: self)
         }
         
     }
     
     @IBAction func passwordDidEndOnExit(sender: UITextField) {
         handleLogin(usernameTextfield.text!, password: passwordTextfield.text!)
+        self.performSegueWithIdentifier("goto_protected", sender: self)
     }
 
     @IBAction func signUpButton(sender: UIButton) {
@@ -80,7 +80,7 @@ public class loginPortalViewController: UIViewController {
         
     }
     
-    public func handleLogin(username: NSString, password: NSString) -> Bool {
+    public func handleLogin(username: NSString, password: NSString) -> Int {
         
         do {
             let post:NSString = "username=\(username)&password=\(password)"
@@ -147,7 +147,7 @@ public class loginPortalViewController: UIViewController {
                         defaultData.setObject(password, forKey: "Password")
                         defaultData.synchronize()
                         
-                        return true
+                        return 1
                         
                     } else {
                         var error_msg:NSString
@@ -162,7 +162,7 @@ public class loginPortalViewController: UIViewController {
                         alertView.addAction(OKAction)
                         self.presentViewController(alertView, animated: true, completion: nil)
                         
-                        return false
+                        return 0
                     }
                     
                 } else {
@@ -171,7 +171,7 @@ public class loginPortalViewController: UIViewController {
                     alertView.addAction(OKAction)
                     self.presentViewController(alertView, animated: true, completion: nil)
                     
-                    return false
+                    return 0
                 }
             } else {
                 let alertView:UIAlertController = UIAlertController(title: "Inloggen mislukt", message: "Er is een fout opgetreden (foutcode i02).", preferredStyle: .Alert)
@@ -182,7 +182,7 @@ public class loginPortalViewController: UIViewController {
                 alertView.addAction(OKAction)
                 self.presentViewController(alertView, animated: true, completion: nil)
                 
-                return false
+                return 0
             }
         } catch {
             let alertView:UIAlertController = UIAlertController(title: "Inloggen mislukt", message: "Er is een fout opgetreden (foutcode i03).", preferredStyle: .Alert)
@@ -190,7 +190,7 @@ public class loginPortalViewController: UIViewController {
             alertView.addAction(OKAction)
             self.presentViewController(alertView, animated: true, completion: nil)
         }
-        return false
+        return 0
     }
 }
 
