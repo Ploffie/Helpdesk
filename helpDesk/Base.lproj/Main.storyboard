@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
@@ -28,7 +28,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-243" y="463"/>
+            <point key="canvasLocation" x="-2370" y="-1913"/>
         </scene>
         <!--Amerion IT-->
         <scene sceneID="PXF-Lx-c1B">
@@ -316,6 +316,36 @@
                                     <segue destination="BYZ-38-t0r" kind="presentation" customClass="SWRevealViewControllerSeguePushController" modalTransitionStyle="coverVertical" id="jw1-0z-Can"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w7t-ef-dBP">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.40784313729999999" green="0.85882352939999995" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="400" id="62A-rS-QKA"/>
+                                    <constraint firstAttribute="height" constant="44" id="BTo-yO-j7g"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Wachtwoord wijzigen">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="62A-rS-QKA"/>
+                                        <exclude reference="BTo-yO-j7g"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="62A-rS-QKA"/>
+                                        <include reference="BTo-yO-j7g"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="changePasswordTapped:" destination="CjM-Nb-4g6" eventType="touchUpInside" id="5ok-jH-bV7"/>
+                                    <segue destination="S6N-s0-f6q" kind="presentation" identifier="goto_changePasswordView" modalTransitionStyle="coverVertical" id="GOZ-AV-syK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -326,7 +356,9 @@
                             <constraint firstItem="d6z-7x-2KA" firstAttribute="top" secondItem="ZZk-T8-qkT" secondAttribute="bottom" constant="127" id="HhD-hD-Dwm"/>
                             <constraint firstItem="dab-r0-eEq" firstAttribute="centerX" secondItem="pJD-J8-vQx" secondAttribute="centerX" id="I8p-aR-a8A"/>
                             <constraint firstItem="dab-r0-eEq" firstAttribute="top" secondItem="SmF-wQ-bKZ" secondAttribute="bottom" constant="48" id="InH-wg-pky"/>
+                            <constraint firstItem="w7t-ef-dBP" firstAttribute="centerX" secondItem="ZZk-T8-qkT" secondAttribute="centerX" id="Nsm-vE-kY5"/>
                             <constraint firstItem="ZZk-T8-qkT" firstAttribute="centerX" secondItem="pJD-J8-vQx" secondAttribute="centerX" id="SF0-lu-7ec"/>
+                            <constraint firstItem="w7t-ef-dBP" firstAttribute="bottom" secondItem="d6z-7x-2KA" secondAttribute="top" id="fkc-ED-IQE"/>
                             <constraint firstItem="pJD-J8-vQx" firstAttribute="leading" secondItem="Msi-z7-0RT" secondAttribute="leadingMargin" constant="89" id="uxz-ta-l5v"/>
                         </constraints>
                         <variation key="default">
@@ -334,9 +366,12 @@
                                 <exclude reference="dab-r0-eEq"/>
                                 <exclude reference="pJD-J8-vQx"/>
                                 <exclude reference="ZZk-T8-qkT"/>
+                                <exclude reference="w7t-ef-dBP"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="SF0-lu-7ec"/>
+                                <exclude reference="Nsm-vE-kY5"/>
+                                <exclude reference="fkc-ED-IQE"/>
                                 <exclude reference="9rg-R2-8hb"/>
                                 <exclude reference="I8p-aR-a8A"/>
                                 <exclude reference="InH-wg-pky"/>
@@ -350,9 +385,12 @@
                                 <include reference="dab-r0-eEq"/>
                                 <include reference="pJD-J8-vQx"/>
                                 <include reference="ZZk-T8-qkT"/>
+                                <include reference="w7t-ef-dBP"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="SF0-lu-7ec"/>
+                                <include reference="Nsm-vE-kY5"/>
+                                <include reference="fkc-ED-IQE"/>
                                 <include reference="9rg-R2-8hb"/>
                                 <include reference="I8p-aR-a8A"/>
                                 <include reference="InH-wg-pky"/>

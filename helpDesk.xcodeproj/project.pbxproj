@@ -146,6 +146,8 @@
 		86A141821C106D7C00E97C7D /* Zoom-In-Line.png in Resources */ = {isa = PBXBuildFile; fileRef = 86A141011C106D7C00E97C7D /* Zoom-In-Line.png */; };
 		86A141831C106D7C00E97C7D /* Zoom-Out-Filled.png in Resources */ = {isa = PBXBuildFile; fileRef = 86A141021C106D7C00E97C7D /* Zoom-Out-Filled.png */; };
 		86A141841C106D7C00E97C7D /* Zoom-Out-Line.png in Resources */ = {isa = PBXBuildFile; fileRef = 86A141031C106D7C00E97C7D /* Zoom-Out-Line.png */; };
+		86C9E5C61C12211D000B109E /* askForHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C9E5C51C12211D000B109E /* askForHelpViewController.swift */; };
+		86CEAF811C19B5FC0039E085 /* changePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CEAF801C19B5FC0039E085 /* changePasswordViewController.swift */; };
 		86EE01E21BF8C9BF004BAFF5 /* protectedPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EE01E11BF8C9BF004BAFF5 /* protectedPageViewController.swift */; };
 		86EE01E41BF8CAB6004BAFF5 /* loginPortalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EE01E31BF8CAB6004BAFF5 /* loginPortalViewController.swift */; };
 		F4A253791C19AE76000B1E75 /* alertMessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A253781C19AE76000B1E75 /* alertMessageTableViewController.swift */; };
@@ -316,6 +318,8 @@
 		86A141011C106D7C00E97C7D /* Zoom-In-Line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Zoom-In-Line.png"; path = "../../helpDesk/helpDesk/ico/Zoom-In-Line.png"; sourceTree = "<group>"; };
 		86A141021C106D7C00E97C7D /* Zoom-Out-Filled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Zoom-Out-Filled.png"; path = "../../helpDesk/helpDesk/ico/Zoom-Out-Filled.png"; sourceTree = "<group>"; };
 		86A141031C106D7C00E97C7D /* Zoom-Out-Line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Zoom-Out-Line.png"; path = "../../helpDesk/helpDesk/ico/Zoom-Out-Line.png"; sourceTree = "<group>"; };
+		86C9E5C51C12211D000B109E /* askForHelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = askForHelpViewController.swift; sourceTree = "<group>"; };
+		86CEAF801C19B5FC0039E085 /* changePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = changePasswordViewController.swift; sourceTree = "<group>"; };
 		86EE01E11BF8C9BF004BAFF5 /* protectedPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = protectedPageViewController.swift; path = ../protectedPageViewController.swift; sourceTree = "<group>"; };
 		86EE01E31BF8CAB6004BAFF5 /* loginPortalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginPortalViewController.swift; sourceTree = "<group>"; };
 		F4A253781C19AE76000B1E75 /* alertMessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = alertMessageTableViewController.swift; path = ../alertMessageTableViewController.swift; sourceTree = "<group>"; };
@@ -374,6 +378,7 @@
 				8640FBA61BEA7C5D004EDEA5 /* AppDelegate.swift */,
 				8640FBA81BEA7C5D004EDEA5 /* ViewController.swift */,
 				8640FBAA1BEA7C5D004EDEA5 /* Main.storyboard */,
+				86C9E5C51C12211D000B109E /* askForHelpViewController.swift */,
 				86EE01E31BF8CAB6004BAFF5 /* loginPortalViewController.swift */,
 				F4A253781C19AE76000B1E75 /* alertMessageTableViewController.swift */,
 				86EE01E11BF8C9BF004BAFF5 /* protectedPageViewController.swift */,
@@ -382,6 +387,7 @@
 				864689CB1BFA4B1600421BBC /* alertMessageViewController.swift */,
 				8640FBAD1BEA7C5D004EDEA5 /* Assets.xcassets */,
 				8640FBB21BEA7C5D004EDEA5 /* Info.plist */,
+				86CEAF801C19B5FC0039E085 /* changePasswordViewController.swift */,
 			);
 			path = helpDesk;
 			sourceTree = "<group>";
@@ -816,6 +822,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8640FBA91BEA7C5D004EDEA5 /* ViewController.swift in Sources */,
+				86C9E5C61C12211D000B109E /* askForHelpViewController.swift in Sources */,
 				8640FBA71BEA7C5D004EDEA5 /* AppDelegate.swift in Sources */,
 				864689CC1BFA4B1600421BBC /* alertMessageViewController.swift in Sources */,
 				8640FBD81BEA7C86004EDEA5 /* SWRevealViewController.m in Sources */,
@@ -823,6 +830,7 @@
 				86EE01E41BF8CAB6004BAFF5 /* loginPortalViewController.swift in Sources */,
 				8640FBDC1BEAA2F4004EDEA5 /* homeViewController.swift in Sources */,
 				86EE01E21BF8C9BF004BAFF5 /* protectedPageViewController.swift in Sources */,
+				86CEAF811C19B5FC0039E085 /* changePasswordViewController.swift in Sources */,
 				8640FBDA1BEAA13E004EDEA5 /* newsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
