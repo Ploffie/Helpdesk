@@ -85,8 +85,6 @@ public class loginPortalViewController: UIViewController {
         do {
             let post:NSString = "username=\(username)&password=\(password)"
             
-            NSLog("PostData: %@",post);
-            
             let url:NSURL = NSURL(string:dbURL)!
             
             let postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
@@ -115,29 +113,14 @@ public class loginPortalViewController: UIViewController {
             if ( urlData != nil ) {
                 let res = response as! NSHTTPURLResponse!;
                 
-                NSLog("Response code: %ld", res.statusCode);
-                
                 if (res.statusCode >= 200 && res.statusCode < 300)
                 {
-                    let responseData:NSString  = NSString(data:urlData!, encoding:NSUTF8StringEncoding)!
-                    
-                    NSLog("Response ==> %@", responseData);
-                    
-                    //var error: NSError?
-                    
                     let jsonData:NSDictionary = try NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers ) as! NSDictionary
-                    
                     
                     let success:NSInteger = jsonData.valueForKey("success") as! NSInteger
                     
-                    //[jsonData[@"success"] integerValue];
-                    
-                    NSLog("Success: %ld", success);
-                    
                     if(success == 1)
                     {
-                        NSLog("Login SUCCESS");
-                        
                         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
                         prefs.setObject(username, forKey: "USERNAME")
                         prefs.setInteger(1, forKey: "ISLOGGEDIN")
@@ -148,7 +131,7 @@ public class loginPortalViewController: UIViewController {
                         defaultData.synchronize()
                         
                         return 1
-                        
+                
                     } else {
                         var error_msg:NSString
                         
