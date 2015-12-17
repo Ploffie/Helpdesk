@@ -131,6 +131,7 @@ public class loginPortalViewController: UIViewController {
                         defaultData.synchronize()
                         
                         return 1
+                
                     } else {
                         var error_msg:NSString
                         
