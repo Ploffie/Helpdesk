@@ -20,7 +20,6 @@ class allertMessageViewController: UIViewController {
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
-    @IBOutlet var alertMessagesTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

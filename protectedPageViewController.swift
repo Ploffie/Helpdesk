@@ -15,7 +15,7 @@
 
 import UIKit
 
-class protectedPageViewController: UIViewController {
+public class protectedPageViewController: UIViewController {
     
     // All programmed
    
@@ -24,7 +24,7 @@ class protectedPageViewController: UIViewController {
     
     let defaultData = NSUserDefaults.standardUserDefaults()
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view
         
@@ -35,13 +35,13 @@ class protectedPageViewController: UIViewController {
         }
     }
     
-    override func didReceiveMemoryWarning() {
+    override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     
-    override func viewDidAppear(animated: Bool) {
+    override public func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -54,14 +54,20 @@ class protectedPageViewController: UIViewController {
     }
     
     @IBAction func signOutTapped(sender: UIButton) {
+        handleLogout()
+    }
+
+    @IBAction func changePasswordTapped(sender: UIButton) {
+        self.performSegueWithIdentifier("goto_changePasswordView", sender: self)
+    }
+    
+    public func handleLogout() -> Void {
         let appDomain = NSBundle.mainBundle().bundleIdentifier
         NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
         defaultData.removeObjectForKey("Username")
         defaultData.removeObjectForKey("Password")
-        
-        
+        return
     }
-    
     
 }
 
