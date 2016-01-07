@@ -32,7 +32,7 @@ public class loginPortalViewController: UIViewController {
     
     @IBOutlet weak var passwordTextfield: UITextField!
     
-    public let defaultData = NSUserDefaults.standardUserDefaults()
+    let defaultData = NSUserDefaults.standardUserDefaults()
     override public func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -174,6 +174,73 @@ public class loginPortalViewController: UIViewController {
             self.presentViewController(alertView, animated: true, completion: nil)
         }
         return 0
+    }
+    
+    public func handleLoginNoAlert(username: NSString, password: NSString) -> Int {
+        do {
+            let post:NSString = "username=\(username)&password=\(password)"
+            
+            let url:NSURL = NSURL(string:dbURL)!
+            
+            let postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
+            
+            let postLength:NSString = String( postData.length )
+            
+            let request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
+            request.HTTPMethod = "POST"
+            request.HTTPBody = postData
+            request.setValue(postLength as String, forHTTPHeaderField: "Content-Length")
+            request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+            request.setValue("application/json", forHTTPHeaderField: "Accept")
+            
+            var response: NSURLResponse?
+            
+            var urlData: NSData?
+            do {
+                urlData = try NSURLConnection.sendSynchronousRequest(request, returningResponse:&response) // Deprecated
+            } catch {
+                urlData = nil
+            }
+            
+            if ( urlData != nil ) {
+                let res = response as! NSHTTPURLResponse!;
+                
+                if (res.statusCode >= 200 && res.statusCode < 300)
+                {
+                    let jsonData:NSDictionary = try NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers ) as! NSDictionary
+                    
+                    let success:NSInteger = jsonData.valueForKey("success") as! NSInteger
+                    
+                    if(success == 1)
+                    {
+                        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+                        prefs.setObject(username, forKey: "USERNAME")
+                        prefs.setInteger(1, forKey: "ISLOGGEDIN")
+                        prefs.synchronize()
+                        
+                        defaultData.setObject(username, forKey: "Username")
+                        defaultData.setObject(password, forKey: "Password")
+                        defaultData.synchronize()
+                        
+                        return 1
+                        
+                    } else {
+                        // Do nothing
+                        return 0
+                    }
+                    
+                } else {
+                    // Do nothing
+                    return 0
+                }
+            } else {
+                // Do nothing
+                return 0
+            }
+        } catch {
+            // Do nothing
+            return 0
+        }
     }
 }
 

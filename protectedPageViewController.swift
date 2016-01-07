@@ -57,10 +57,6 @@ public class protectedPageViewController: UIViewController {
         handleLogout()
     }
 
-    @IBAction func changePasswordTapped(sender: UIButton) {
-        self.performSegueWithIdentifier("goto_changePasswordView", sender: self)
-    }
-    
     public func handleLogout() -> Void {
         let appDomain = NSBundle.mainBundle().bundleIdentifier
         NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
