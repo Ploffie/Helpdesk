@@ -150,7 +150,7 @@
 		86CEAF811C19B5FC0039E085 /* changePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CEAF801C19B5FC0039E085 /* changePasswordViewController.swift */; };
 		86EE01E21BF8C9BF004BAFF5 /* protectedPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EE01E11BF8C9BF004BAFF5 /* protectedPageViewController.swift */; };
 		86EE01E41BF8CAB6004BAFF5 /* loginPortalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EE01E31BF8CAB6004BAFF5 /* loginPortalViewController.swift */; };
-		F4A253791C19AE76000B1E75 /* alertMessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A253781C19AE76000B1E75 /* alertMessageTableViewController.swift */; };
+		86FE30161C3E999A00C69534 /* alertMessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FE30151C3E999A00C69534 /* alertMessageTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -322,7 +322,7 @@
 		86CEAF801C19B5FC0039E085 /* changePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = changePasswordViewController.swift; sourceTree = "<group>"; };
 		86EE01E11BF8C9BF004BAFF5 /* protectedPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = protectedPageViewController.swift; path = ../protectedPageViewController.swift; sourceTree = "<group>"; };
 		86EE01E31BF8CAB6004BAFF5 /* loginPortalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginPortalViewController.swift; sourceTree = "<group>"; };
-		F4A253781C19AE76000B1E75 /* alertMessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = alertMessageTableViewController.swift; path = ../alertMessageTableViewController.swift; sourceTree = "<group>"; };
+		86FE30151C3E999A00C69534 /* alertMessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = alertMessageTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -376,11 +376,11 @@
 				86A140821C106D4700E97C7D /* icons */,
 				8640FBD41BEA7C65004EDEA5 /* SWRevealViewController */,
 				8640FBA61BEA7C5D004EDEA5 /* AppDelegate.swift */,
-				8640FBA81BEA7C5D004EDEA5 /* ViewController.swift */,
 				8640FBAA1BEA7C5D004EDEA5 /* Main.storyboard */,
+				86FE30151C3E999A00C69534 /* alertMessageTableViewController.swift */,
 				86C9E5C51C12211D000B109E /* askForHelpViewController.swift */,
 				86EE01E31BF8CAB6004BAFF5 /* loginPortalViewController.swift */,
-				F4A253781C19AE76000B1E75 /* alertMessageTableViewController.swift */,
+				8640FBA81BEA7C5D004EDEA5 /* ViewController.swift */,
 				86EE01E11BF8C9BF004BAFF5 /* protectedPageViewController.swift */,
 				8640FBD91BEAA13E004EDEA5 /* newsViewController.swift */,
 				8640FBDB1BEAA2F4004EDEA5 /* homeViewController.swift */,
@@ -618,6 +618,7 @@
 		8640FB9B1BEA7C5D004EDEA5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0710;
 				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Amerion IT";
@@ -821,12 +822,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86FE30161C3E999A00C69534 /* alertMessageTableViewController.swift in Sources */,
 				8640FBA91BEA7C5D004EDEA5 /* ViewController.swift in Sources */,
 				86C9E5C61C12211D000B109E /* askForHelpViewController.swift in Sources */,
 				8640FBA71BEA7C5D004EDEA5 /* AppDelegate.swift in Sources */,
 				864689CC1BFA4B1600421BBC /* alertMessageViewController.swift in Sources */,
 				8640FBD81BEA7C86004EDEA5 /* SWRevealViewController.m in Sources */,
-				F4A253791C19AE76000B1E75 /* alertMessageTableViewController.swift in Sources */,
 				86EE01E41BF8CAB6004BAFF5 /* loginPortalViewController.swift in Sources */,
 				8640FBDC1BEAA2F4004EDEA5 /* homeViewController.swift in Sources */,
 				86EE01E21BF8C9BF004BAFF5 /* protectedPageViewController.swift in Sources */,
