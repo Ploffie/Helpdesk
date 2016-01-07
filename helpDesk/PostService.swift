@@ -2,27 +2,34 @@
 //  PostService.swift
 //  helpDesk
 //
-//  Created by Thuis on 12-11-15.
+//  Created by Thuis on 18-12-15.
 //  Copyright © 2015 Amerion IT. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class PostService {
     
-    var settings:Settings!
+    var names = [String]()
     
-    init(){
-        self.settings = Settings()
+    do {
+    let json = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
+    
+    if let blogs = json["blogs"] as? [[String: AnyObject]] {
+    for blog in blogs {
+    if let name = blog["name"] as? String {
+    names.append(name)
+    }
+    }
+    }
+    } catch {
+    print("error serializing JSON: \(error)")
     }
     
-    func getPosts(callback:(NSDictionary)->()) {
-        print("get posts")
-        request(settings.viewPosts,callback: callback)
-    }
+    print(names) // ["Bloxus test", "Manila Test"]
     
-    func request(url:String,callback:(NSDictionary)->()) {
-        
-    }
-}
+    if let blogs = json["blogs"] as? [[String: AnyObject]] {
+        // if we get "blogs" from the JSON
+        // AND we can cast it to an array of dictionaries
+        // then this code will execute
+    }}
