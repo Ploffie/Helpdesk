@@ -16,7 +16,6 @@
 		8640FBD81BEA7C86004EDEA5 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8640FBD71BEA7C86004EDEA5 /* SWRevealViewController.m */; };
 		8640FBDA1BEAA13E004EDEA5 /* newsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8640FBD91BEAA13E004EDEA5 /* newsViewController.swift */; };
 		8640FBDC1BEAA2F4004EDEA5 /* homeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8640FBDB1BEAA2F4004EDEA5 /* homeViewController.swift */; };
-		864689CC1BFA4B1600421BBC /* alertMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864689CB1BFA4B1600421BBC /* alertMessageViewController.swift */; };
 		86A141041C106D7C00E97C7D /* +.png in Resources */ = {isa = PBXBuildFile; fileRef = 86A140831C106D7C00E97C7D /* +.png */; };
 		86A141051C106D7C00E97C7D /* Action-Filled.png in Resources */ = {isa = PBXBuildFile; fileRef = 86A140841C106D7C00E97C7D /* Action-Filled.png */; };
 		86A141061C106D7C00E97C7D /* Action-Line.png in Resources */ = {isa = PBXBuildFile; fileRef = 86A140851C106D7C00E97C7D /* Action-Line.png */; };
@@ -149,8 +148,8 @@
 		86C9E5C61C12211D000B109E /* askForHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C9E5C51C12211D000B109E /* askForHelpViewController.swift */; };
 		86EE01E21BF8C9BF004BAFF5 /* protectedPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EE01E11BF8C9BF004BAFF5 /* protectedPageViewController.swift */; };
 		86EE01E41BF8CAB6004BAFF5 /* loginPortalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EE01E31BF8CAB6004BAFF5 /* loginPortalViewController.swift */; };
+		F44976661C3FE306003249EE /* alertViewFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44976651C3FE306003249EE /* alertViewFunction.swift */; };
 		F46AA74C1C22CDA9005C8D15 /* changePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46AA74B1C22CDA9005C8D15 /* changePasswordViewController.swift */; };
-		F4A253791C19AE76000B1E75 /* alertMessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A253781C19AE76000B1E75 /* alertMessageTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -188,7 +187,6 @@
 		8640FBD71BEA7C86004EDEA5 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		8640FBD91BEAA13E004EDEA5 /* newsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newsViewController.swift; sourceTree = "<group>"; };
 		8640FBDB1BEAA2F4004EDEA5 /* homeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = homeViewController.swift; sourceTree = "<group>"; };
-		864689CB1BFA4B1600421BBC /* alertMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = alertMessageViewController.swift; sourceTree = "<group>"; };
 		86A140831C106D7C00E97C7D /* +.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "+.png"; path = "../../helpDesk/helpDesk/ico/+.png"; sourceTree = "<group>"; };
 		86A140841C106D7C00E97C7D /* Action-Filled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Action-Filled.png"; path = "../../helpDesk/helpDesk/ico/Action-Filled.png"; sourceTree = "<group>"; };
 		86A140851C106D7C00E97C7D /* Action-Line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Action-Line.png"; path = "../../helpDesk/helpDesk/ico/Action-Line.png"; sourceTree = "<group>"; };
@@ -321,8 +319,8 @@
 		86C9E5C51C12211D000B109E /* askForHelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = askForHelpViewController.swift; sourceTree = "<group>"; };
 		86EE01E11BF8C9BF004BAFF5 /* protectedPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = protectedPageViewController.swift; path = ../protectedPageViewController.swift; sourceTree = "<group>"; };
 		86EE01E31BF8CAB6004BAFF5 /* loginPortalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginPortalViewController.swift; sourceTree = "<group>"; };
+		F44976651C3FE306003249EE /* alertViewFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = alertViewFunction.swift; path = ../alertViewFunction.swift; sourceTree = "<group>"; };
 		F46AA74B1C22CDA9005C8D15 /* changePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = changePasswordViewController.swift; path = ../changePasswordViewController.swift; sourceTree = "<group>"; };
-		F4A253781C19AE76000B1E75 /* alertMessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = alertMessageTableViewController.swift; path = ../alertMessageTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -377,15 +375,14 @@
 				8640FBD41BEA7C65004EDEA5 /* SWRevealViewController */,
 				8640FBA61BEA7C5D004EDEA5 /* AppDelegate.swift */,
 				8640FBAA1BEA7C5D004EDEA5 /* Main.storyboard */,
-				86FE30151C3E999A00C69534 /* alertMessageTableViewController.swift */,
 				86C9E5C51C12211D000B109E /* askForHelpViewController.swift */,
 				86EE01E31BF8CAB6004BAFF5 /* loginPortalViewController.swift */,
 				8640FBA81BEA7C5D004EDEA5 /* ViewController.swift */,
+				F44976651C3FE306003249EE /* alertViewFunction.swift */,
 				86EE01E11BF8C9BF004BAFF5 /* protectedPageViewController.swift */,
 				8640FBD91BEAA13E004EDEA5 /* newsViewController.swift */,
 				F46AA74B1C22CDA9005C8D15 /* changePasswordViewController.swift */,
 				8640FBDB1BEAA2F4004EDEA5 /* homeViewController.swift */,
-				864689CB1BFA4B1600421BBC /* alertMessageViewController.swift */,
 				8640FBAD1BEA7C5D004EDEA5 /* Assets.xcassets */,
 				8640FBB21BEA7C5D004EDEA5 /* Info.plist */,
 			);
@@ -822,11 +819,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86FE30161C3E999A00C69534 /* alertMessageTableViewController.swift in Sources */,
 				8640FBA91BEA7C5D004EDEA5 /* ViewController.swift in Sources */,
 				86C9E5C61C12211D000B109E /* askForHelpViewController.swift in Sources */,
 				8640FBA71BEA7C5D004EDEA5 /* AppDelegate.swift in Sources */,
-				864689CC1BFA4B1600421BBC /* alertMessageViewController.swift in Sources */,
+				F44976661C3FE306003249EE /* alertViewFunction.swift in Sources */,
 				8640FBD81BEA7C86004EDEA5 /* SWRevealViewController.m in Sources */,
 				86EE01E41BF8CAB6004BAFF5 /* loginPortalViewController.swift in Sources */,
 				8640FBDC1BEAA2F4004EDEA5 /* homeViewController.swift in Sources */,
