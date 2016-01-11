@@ -32,7 +32,7 @@ public class loginPortalViewController: UIViewController {
     
     @IBOutlet weak var passwordTextfield: UITextField!
     
-    public let defaultData = NSUserDefaults.standardUserDefaults()
+    let defaultData = NSUserDefaults.standardUserDefaults()
     override public func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

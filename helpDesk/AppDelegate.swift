@@ -21,33 +21,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let defaultData = NSUserDefaults.standardUserDefaults()
-    let loginControllerClass = loginPortalViewController()
+    let log = loginPortalViewController()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         // Override point for customization after application launch.
         let username = defaultData.stringForKey("Username")
         let password = defaultData.stringForKey("Password")
+        
         if(defaultData.objectForKey("Username") == nil ||
             defaultData.objectForKey("Password") == nil) {
+                
             self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+                
             let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("unprotectedEntryPoint") as! SWRevealViewController
+                
             self.window?.rootViewController = exampleViewController
             self.window?.makeKeyAndVisible()
+                
             return true
         } else {
             if(loginControllerClass.handleLoginNoAlert(username!, password: password!) == 1) {
                 self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+                
                 let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("protectedEntryPoint") as! SWRevealViewController
+                
                 self.window?.rootViewController = exampleViewController
                 self.window?.makeKeyAndVisible()
+                
+                return true
+            } else if(loginReturn == 0) {
+                
+                self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+                
+                let mainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let exampleViewController:SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("unprotectedEntryPoint") as! SWRevealViewController
+                
+                self.window?.rootViewController = exampleViewController
+                self.window?.makeKeyAndVisible()
+                
                 return true
             }
+            
+        return false // Code shouldn't reach this point, no idea what will happen
         }
         
-        return true
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -71,5 +91,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-}
 
+}
