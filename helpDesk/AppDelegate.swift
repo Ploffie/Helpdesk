@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.makeKeyAndVisible()
             return true
         } else {
-            if(loginControllerClass.handleLogin(username!, password: password!) == 1) {
+            if(loginControllerClass.handleLoginNoAlert(username!, password: password!) == 1) {
                 self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
                 let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("protectedEntryPoint") as! SWRevealViewController

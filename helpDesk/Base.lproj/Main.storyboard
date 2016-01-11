@@ -1011,10 +1011,10 @@
             </objects>
             <point key="canvasLocation" x="4002" y="473"/>
         </scene>
-        <!--Alert Message Table View Controller-->
+        <!--Waarschuwings berichten-->
         <scene sceneID="UgS-6l-i5a">
             <objects>
-                <tableViewController id="QMD-Vb-d1W" customClass="alertMessageTableViewController" customModule="helpDesk" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="QMD-Vb-d1W" customClass="alertMessageTableTableViewController" customModule="helpDesk" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="CBC-yV-aP6">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1033,11 +1033,18 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <navigationItem key="navigationItem" id="M5w-zV-w5L"/>
+                    <navigationItem key="navigationItem" title="Waarschuwings berichten" id="M5w-zV-w5L">
+                        <barButtonItem key="leftBarButtonItem" image="List.png" style="done" id="9tE-Tm-W4o">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="menuButton" destination="9tE-Tm-W4o" id="f8Y-zP-hUU"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j0N-gc-SkC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4653" y="1132"/>
+            <point key="canvasLocation" x="4641" y="1150"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="b9T-uC-Hha">
@@ -1048,6 +1055,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
+                        <color key="barTintColor" red="0.15686274510000001" green="0.58039215690000001" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
