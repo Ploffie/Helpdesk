@@ -25,6 +25,7 @@ public class loginPortalViewController: UIViewController {
     // All programmed
     
     private let dbURL:String = "http://wybren.haptotherapie-twente.nl/jsonlogin2.php"
+    private let Alert = alertViewFunction()
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
@@ -54,11 +55,7 @@ public class loginPortalViewController: UIViewController {
         let password:NSString = passwordTextfield.text!
         
         if ( username.isEqualToString("") || password.isEqualToString("") ) {
-            
-            let alertView:UIAlertController = UIAlertController(title: "Inloggen mislukt", message: "Vul a.u.b. een gebruikersnaam en wachtwoord in.", preferredStyle: .Alert)
-            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
-            alertView.addAction(OKAction)
-            self.presentViewController(alertView, animated: true, completion: nil)
+            self.presentViewController(Alert.create("Inloggen mislukt", message: "Vul a.u.b. een gebruikersnaam en wachtwoord in."), animated: true, completion: nil)
         } else {
             handleLogin(username, password: password)
             self.performSegueWithIdentifier("goto_protected", sender: self)
@@ -72,11 +69,7 @@ public class loginPortalViewController: UIViewController {
     }
 
     @IBAction func signUpButton(sender: UIButton) {
-        
-        let alertView:UIAlertController = UIAlertController(title: "Registreren", message: "Neem contact op met Amerion IT om te registreren.", preferredStyle: .Alert)
-        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
-        alertView.addAction(OKAction)
-        self.presentViewController(alertView, animated: true, completion: nil)
+        self.presentViewController(Alert.create("Registreren", message: "Neem contact op met Amerion IT om te registreren."), animated: true, completion: nil)
         
     }
     
@@ -98,15 +91,12 @@ public class loginPortalViewController: UIViewController {
             request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
             request.setValue("application/json", forHTTPHeaderField: "Accept")
             
-            
-            var reponseError: NSError?
             var response: NSURLResponse?
             
             var urlData: NSData?
             do {
                 urlData = try NSURLConnection.sendSynchronousRequest(request, returningResponse:&response) // Deprecated
-            } catch let error as NSError {
-                reponseError = error
+            } catch {
                 urlData = nil
             }
             
@@ -140,40 +130,22 @@ public class loginPortalViewController: UIViewController {
                         } else {
                             error_msg = "Er is een fout opgetreden, probeer het later opnieuw."
                         }
-                        let alertView:UIAlertController = UIAlertController(title: "Inloggen mislukt", message: error_msg as String, preferredStyle: .Alert)
-                        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
-                        alertView.addAction(OKAction)
-                        self.presentViewController(alertView, animated: true, completion: nil)
-                        
+                        self.presentViewController(Alert.create("Inloggen mislukt", message: error_msg as String), animated: true, completion: nil)
                         return 0
                     }
                     
                 } else {
-                    let alertView:UIAlertController = UIAlertController(title: "Inloggen mislukt", message: "Er is een fout opgetreden (foutcode i01).", preferredStyle: .Alert)
-                    let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
-                    alertView.addAction(OKAction)
-                    self.presentViewController(alertView, animated: true, completion: nil)
-                    
+                    self.presentViewController(Alert.create("Inloggen mislukt", message: "Er is een fout opgetreden (foutcode i01)."), animated: true, completion: nil)
                     return 0
                 }
             } else {
-                let alertView:UIAlertController = UIAlertController(title: "Inloggen mislukt", message: "Er is een fout opgetreden (foutcode i02).", preferredStyle: .Alert)
-                if let error = reponseError {
-                    alertView.message = (error.localizedDescription)
-                }
-                let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
-                alertView.addAction(OKAction)
-                self.presentViewController(alertView, animated: true, completion: nil)
-                
+                self.presentViewController(Alert.create("Inloggen mislukt", message: "Er is een fout opgetreden (foutcode i02)"), animated: true, completion: nil)
                 return 0
             }
         } catch {
-            let alertView:UIAlertController = UIAlertController(title: "Inloggen mislukt", message: "Er is een fout opgetreden (foutcode i03).", preferredStyle: .Alert)
-            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
-            alertView.addAction(OKAction)
-            self.presentViewController(alertView, animated: true, completion: nil)
+            self.presentViewController(Alert.create("Inloggen mislukt", message: "Er is een fout opgetreden (foutcode i03)"), animated: true, completion: nil)
+            return 0
         }
-        return 0
     }
     
     public func handleLoginNoAlert(username: NSString, password: NSString) -> Int {
