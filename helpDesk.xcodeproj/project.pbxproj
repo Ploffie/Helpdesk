@@ -381,7 +381,6 @@
 				8640FBA81BEA7C5D004EDEA5 /* ViewController.swift */,
 				86EE01E11BF8C9BF004BAFF5 /* protectedPageViewController.swift */,
 				8640FBD91BEAA13E004EDEA5 /* newsViewController.swift */,
-				F46AA74B1C22CDA9005C8D15 /* changePasswordViewController.swift */,
 				8640FBDB1BEAA2F4004EDEA5 /* homeViewController.swift */,
 				864689CB1BFA4B1600421BBC /* alertMessageViewController.swift */,
 				8640FBAD1BEA7C5D004EDEA5 /* Assets.xcassets */,
@@ -829,7 +828,6 @@
 				8640FBDC1BEAA2F4004EDEA5 /* homeViewController.swift in Sources */,
 				86FE301A1C3FE0C900C69534 /* alertMessageTableTableViewController.swift in Sources */,
 				86EE01E21BF8C9BF004BAFF5 /* protectedPageViewController.swift in Sources */,
-				F46AA74C1C22CDA9005C8D15 /* changePasswordViewController.swift in Sources */,
 				8640FBDA1BEAA13E004EDEA5 /* newsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
