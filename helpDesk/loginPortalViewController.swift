@@ -57,15 +57,17 @@ public class loginPortalViewController: UIViewController {
         if ( username.isEqualToString("") || password.isEqualToString("") ) {
             self.presentViewController(Alert.create("Inloggen mislukt", message: "Vul a.u.b. een gebruikersnaam en wachtwoord in."), animated: true, completion: nil)
         } else {
-            handleLogin(username, password: password)
-            self.performSegueWithIdentifier("goto_protected", sender: self)
+            if(handleLogin(username, password: password) == 1) {
+                self.performSegueWithIdentifier("goto_protected", sender: self)
+            }
         }
         
     }
     
     @IBAction func passwordDidEndOnExit(sender: UITextField) {
-        handleLogin(usernameTextfield.text!, password: passwordTextfield.text!)
-        self.performSegueWithIdentifier("goto_protected", sender: self)
+        if(handleLogin(usernameTextfield.text!, password: passwordTextfield.text!) == 1) {
+            self.performSegueWithIdentifier("goto_protected", sender: self)
+        }
     }
 
     @IBAction func signUpButton(sender: UIButton) {

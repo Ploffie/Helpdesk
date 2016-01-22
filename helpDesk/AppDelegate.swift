@@ -42,10 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
             return true
         } else {
-            let loginReturn:Int = log.handleLoginNoAlert(username!, password: password!)
-            
+            let loginReturn = log.handleLoginNoAlert(username!, password: password!)
             if(loginReturn == 1) {
-                
                 self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
                 
                 let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -68,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return true
             }
             
-        return false // Code shouldn't reach this point, no idea what will happen
+        return false // Code shouldn't reach this point, no idea what will happen.
         }
         
     }

@@ -376,12 +376,12 @@
 				8640FBA61BEA7C5D004EDEA5 /* AppDelegate.swift */,
 				8640FBAA1BEA7C5D004EDEA5 /* Main.storyboard */,
 				86C9E5C51C12211D000B109E /* askForHelpViewController.swift */,
+				86FE30191C3FE0C900C69534 /* alertMessageTableTableViewController.swift */,
 				86EE01E31BF8CAB6004BAFF5 /* loginPortalViewController.swift */,
 				8640FBA81BEA7C5D004EDEA5 /* ViewController.swift */,
 				F44976651C3FE306003249EE /* alertViewFunction.swift */,
 				86EE01E11BF8C9BF004BAFF5 /* protectedPageViewController.swift */,
 				8640FBD91BEAA13E004EDEA5 /* newsViewController.swift */,
-				F46AA74B1C22CDA9005C8D15 /* changePasswordViewController.swift */,
 				8640FBDB1BEAA2F4004EDEA5 /* homeViewController.swift */,
 				8640FBAD1BEA7C5D004EDEA5 /* Assets.xcassets */,
 				8640FBB21BEA7C5D004EDEA5 /* Info.plist */,
@@ -826,8 +826,8 @@
 				8640FBD81BEA7C86004EDEA5 /* SWRevealViewController.m in Sources */,
 				86EE01E41BF8CAB6004BAFF5 /* loginPortalViewController.swift in Sources */,
 				8640FBDC1BEAA2F4004EDEA5 /* homeViewController.swift in Sources */,
+				86FE301A1C3FE0C900C69534 /* alertMessageTableTableViewController.swift in Sources */,
 				86EE01E21BF8C9BF004BAFF5 /* protectedPageViewController.swift in Sources */,
-				F46AA74C1C22CDA9005C8D15 /* changePasswordViewController.swift in Sources */,
 				8640FBDA1BEAA13E004EDEA5 /* newsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
