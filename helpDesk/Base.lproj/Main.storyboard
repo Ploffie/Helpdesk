@@ -322,6 +322,9 @@
                                         <include reference="BTo-yO-j7g"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="changePasswordButtonTapped:" destination="CjM-Nb-4g6" eventType="touchUpInside" id="AAa-3P-QzW"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

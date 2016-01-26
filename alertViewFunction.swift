@@ -16,5 +16,4 @@ public class alertViewFunction {
         alertView.addAction(OKAction)
         return alertView
     }
-    
 }

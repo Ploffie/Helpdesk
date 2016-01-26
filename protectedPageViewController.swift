@@ -23,6 +23,7 @@ public class protectedPageViewController: UIViewController {
     @IBOutlet weak var userNameLabel: UILabel!
     
     let defaultData = NSUserDefaults.standardUserDefaults()
+    let Alert = alertViewFunction()
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +56,10 @@ public class protectedPageViewController: UIViewController {
     
     @IBAction func signOutTapped(sender: UIButton) {
         handleLogout()
+    }
+    
+    @IBAction func changePasswordButtonTapped(sender: AnyObject) {
+        self.presentViewController(Alert.create("Wachtwoord wijzigen", message: "Neem contact op met Amerion IT om uw wachtwoord te wijzigen."), animated: true, completion: nil)
     }
 
     public func handleLogout() -> Void {
