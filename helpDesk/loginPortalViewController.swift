@@ -27,6 +27,7 @@ public class loginPortalViewController: UIViewController {
     
     private let dbURL:String = "http://wybren.haptotherapie-twente.nl/jsonlogin2.php"
     private let Alert = alertViewFunction()
+    public var loginReturn:Bool!
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
@@ -58,7 +59,7 @@ public class loginPortalViewController: UIViewController {
         if ( username == "" || password == "" ) {
             self.presentViewController(Alert.create("Inloggen mislukt", message: "Vul a.u.b. een gebruikersnaam en wachtwoord in."), animated: true, completion: nil)
         } else {
-            if(handleLogin(username, password: password) == 1) {
+            if(handleLogin(username, password: password) == true) {
                 self.performSegueWithIdentifier("goto_protected", sender: self)
             }
         }
@@ -66,7 +67,7 @@ public class loginPortalViewController: UIViewController {
     }
     
     @IBAction func passwordDidEndOnExit(sender: UITextField) {
-        if(handleLogin(usernameTextfield.text!, password: passwordTextfield.text!) == 1) {
+        if(handleLogin(usernameTextfield.text!, password: passwordTextfield.text!) == true) {
             self.performSegueWithIdentifier("goto_protected", sender: self)
         }
     }
@@ -76,27 +77,41 @@ public class loginPortalViewController: UIViewController {
         
     }
     
-    public func handleLogin(username: String, password: String) -> Int {
+    public func handleLogin(username: String, password: String) -> Bool {
+        let defaultData = NSUserDefaults.standardUserDefaults()
         Alamofire.request(.POST, dbURL, parameters: ["username": username, "password": password])
             .responseJSON { response in
-                let HTTPStatusCode = response.response!.statusCode
+                let HTTPStatusCode = response.response?.statusCode
                 let JSONResponse = response.result.value
                 if(!(HTTPStatusCode > 0)) {
                     self.presentViewController(self.Alert.create("Inloggen mislukt", message: "Er is geen verbinding met de server. Heeft u een werkende internetverbinding?"), animated: true, completion: nil)
+                    defaultData.setBool(false, forKey: "loginReturn")
                 } else if(!(HTTPStatusCode >= 200 && HTTPStatusCode < 300)) {
-                    self.presentViewController(self.Alert.create("Inloggen mislukt", message: "Er heeft zich een fout opgetreden (statuscode \(HTTPStatusCode)."), animated: true, completion: nil)
-                } else if(JSONResponse == nil) { // DATABASE RETURNS NIL
-                        self.presentViewController(self.Alert.create("Inloggen mislukt", message: "Er heeft zich een serverfout opgetreden (foutcode i01)"), animated: true, completion: nil)
-                } else if(JSONResponse!.valueForKey("success") != nil) {
-                    self.presentViewController(self.Alert.create("Inloggen mislukt", message: JSONResponse!.valueForKey("error_message") as! String), animated: true, completion: nil)
+                    self.presentViewController(self.Alert.create("Inloggen mislukt", message: "Er heeft zich een fout opgetreden (statuscode \(HTTPStatusCode))."), animated: true, completion: nil)
+                    defaultData.setBool(false, forKey: "loginReturn")
+                } else if(JSONResponse == nil) { // Shouldn't happen, coded to prevent app from crashing
+                    self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: "Er heeft zich een onbekende fout opgetreden."), animated: true, completion: nil)
+                    defaultData.setBool(false, forKey: "loginReturn")
+                } else if(JSONResponse!.valueForKey("company") != nil ||
+                          JSONResponse!.valueForKey("id") != nil ||
+                          JSONResponse!.valueForKey("occupation") != nil ||
+                          JSONResponse!.valueForKey("system") != nil) {
+                            defaultData.setValue(JSONResponse!.valueForKey("company"), forKey: "Company")
+                            defaultData.setValue(JSONResponse!.valueForKey("id"), forKey: "ID")
+                            defaultData.setValue(JSONResponse!.valueForKey("occupation"), forKey: "Occupation")
+                            defaultData.setValue(JSONResponse!.valueForKey("system"), forKey: "System")
+                            defaultData.setBool(true, forKey: "loginReturn")
+                } else {
+                    print("DEBUG")
                 }
                 print("JSON Response: \(response.result.value)")
             }
-        return 0
+        print(defaultData.boolForKey("loginReturn"))
+        return defaultData.boolForKey("loginReturn")
     }
     
-    public func handleLoginNoAlert(username: NSString, password: NSString) -> Int {
-        return 0
+    public func handleLoginNoAlert(username: NSString, password: NSString) -> Bool {
+        return false
     }
 }
 

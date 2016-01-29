@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         } else {
             let loginReturn = log.handleLoginNoAlert(username!, password: password!)
-            if(loginReturn == 1) {
+            if(loginReturn == true) {
                 self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
                 
                 let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.window?.makeKeyAndVisible()
                 
                 return true
-            } else if(loginReturn == 0) {
+            } else if(loginReturn == false) {
                 
                 self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
                 
@@ -68,7 +68,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         return false // Code shouldn't reach this point, no idea what will happen.
         }
-        
     }
 
     func applicationWillResignActive(application: UIApplication) {
