@@ -275,7 +275,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZk-T8-qkT">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <color key="backgroundColor" red="0.27196937919463088" green="0.95686274509803904" blue="0.95686274509803904" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.95686274509803904" green="0.55920175679690132" blue="0.36380921086970686" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="82" id="V5n-7r-jK2"/>
                                 </constraints>
@@ -869,7 +869,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ysT-Vc-PNG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3708" y="81"/>
+            <point key="canvasLocation" x="3060" y="65"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wVt-Ns-Vwt">
