@@ -13,6 +13,7 @@
  */
 
 import UIKit
+import Alamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         let username = defaultData.stringForKey("Username")
         let password = defaultData.stringForKey("Password")
+        let dbURL = "http://wybren.haptotherapie-twente.nl/jsonlogin2.php"
         
         if(defaultData.objectForKey("Username") == nil ||
             defaultData.objectForKey("Password") == nil) {
@@ -42,31 +44,67 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
             return true
         } else {
-            let loginReturn = log.handleLoginNoAlert(username!, password: password!)
-            if(loginReturn == true) {
-                self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-                
-                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("protectedEntryPoint") as! SWRevealViewController
-                
-                self.window?.rootViewController = exampleViewController
-                self.window?.makeKeyAndVisible()
-                
-                return true
-            } else if(loginReturn == false) {
-                
-                self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-                
-                let mainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let exampleViewController:SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("unprotectedEntryPoint") as! SWRevealViewController
-                
-                self.window?.rootViewController = exampleViewController
-                self.window?.makeKeyAndVisible()
-                
-                return true
-            }
+            Alamofire.request(.POST, dbURL, parameters: ["username": username!, "password": password!])
+                    .responseJSON { response in
+                        
+                        let HTTPStatusCode = response.response?.statusCode
+                        let JSONResponse = response.result.value!
+                        
+                        if(!(HTTPStatusCode > 0)) {
+                            
+                            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+                            
+                            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                            let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("unprotectedEntryPoint") as! SWRevealViewController
+                            
+                            self.window?.rootViewController = exampleViewController
+                            self.window?.makeKeyAndVisible()
+
+                            return
+                            
+                        } else if(!(HTTPStatusCode >= 200 && HTTPStatusCode < 300)) {
+                            
+                            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+                            
+                            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                            let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("unprotectedEntryPoint") as! SWRevealViewController
+                            
+                            self.window?.rootViewController = exampleViewController
+                            self.window?.makeKeyAndVisible()
+
+                            return
+                            
+                        } else if(JSONResponse.valueForKey("company") != nil &&
+                            JSONResponse.valueForKey("id") != nil &&
+                            JSONResponse.valueForKey("occupation") != nil &&
+                            JSONResponse.valueForKey("system") != nil) {
+                                
+                                self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+                                
+                                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                                let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("protectedEntryPoint") as! SWRevealViewController
+                                
+                                self.window?.rootViewController = exampleViewController
+                                self.window?.makeKeyAndVisible()
+                                
+                                return
+                                
+                        } else { // No idea when code will reach this point, better be safe than sure
+                            
+                            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+                            
+                            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                            let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("unprotectedEntryPoint") as! SWRevealViewController
+                            
+                            self.window?.rootViewController = exampleViewController
+                            self.window?.makeKeyAndVisible()
+                            
+                            return
+                            
+                        }
+                }
             
-        return false // Code shouldn't reach this point, no idea what will happen.
+        return true // Code shouldn't reach this point, no idea what will happen.
         }
     }
 

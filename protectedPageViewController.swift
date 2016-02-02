@@ -45,13 +45,7 @@ public class protectedPageViewController: UIViewController {
     override public func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         
-        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        let isLoggedIn:Int = prefs.integerForKey("ISLOGGEDIN") as Int
-        if (isLoggedIn != 1) {
-            self.performSegueWithIdentifier("goto_login", sender: self)
-        } else {
-            self.userNameLabel.text = prefs.valueForKey("USERNAME") as? String
-        }
+        self.userNameLabel.text = (self.defaultData.valueForKey("Username") as! String)
     }
     
     @IBAction func signOutTapped(sender: UIButton) {
@@ -67,6 +61,10 @@ public class protectedPageViewController: UIViewController {
         NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
         defaultData.removeObjectForKey("Username")
         defaultData.removeObjectForKey("Password")
+        defaultData.removeObjectForKey("Company")
+        defaultData.removeObjectForKey("ID")
+        defaultData.removeObjectForKey("Occupation")
+        defaultData.removeObjectForKey("System")
         return
     }
     
