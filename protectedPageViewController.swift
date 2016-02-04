@@ -45,7 +45,7 @@ public class protectedPageViewController: UIViewController {
     override public func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         
-        self.userNameLabel.text = (self.defaultData.valueForKey("Username") as! String)
+        self.userNameLabel.text = ("Welkom, \(self.defaultData.valueForKey("Username") as! String)!")
     }
     
     @IBAction func signOutTapped(sender: UIButton) {

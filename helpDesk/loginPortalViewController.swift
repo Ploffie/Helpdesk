@@ -95,12 +95,13 @@ public class loginPortalViewController: UIViewController {
                                 
                                 return
 
-                        } else { // No idea when code will reach this point, better be safe than sure
-                            self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: "Er heeft zich een onbekende fout opgetreden."), animated: true, completion: nil)
-                            print("Debug2")
-                            print(JSONResponse)
+                        } else if(JSONResponse.valueForKey("success") != nil &&
+                                  JSONResponse.valueForKey("success") as! Int == 0) {
+                            self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: JSONResponse.valueForKey("error_message") as! String), animated: true, completion: nil)
                             return
-                        
+                    } else {
+                        self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: "Er heeft zich een onbekende fout opgetreden."), animated: true, completion: nil)
+                        return
                     }
             }
         }
@@ -150,11 +151,15 @@ public class loginPortalViewController: UIViewController {
                             
                             return
                             
-                    } else { // No idea when code will reach this point, better be safe than sure
+                    } else if(JSONResponse.valueForKey("success") != nil &&
+                        JSONResponse.valueForKey("success") as! Int == 0) {
+                            self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: JSONResponse.valueForKey("error_message") as! String), animated: true, completion: nil)
+                            return
+                    } else {
                         self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: "Er heeft zich een onbekende fout opgetreden."), animated: true, completion: nil)
                         return
-                        
                     }
+
             }
         }
 

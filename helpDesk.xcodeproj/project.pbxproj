@@ -149,6 +149,7 @@
 		86EE01E21BF8C9BF004BAFF5 /* protectedPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EE01E11BF8C9BF004BAFF5 /* protectedPageViewController.swift */; };
 		86EE01E41BF8CAB6004BAFF5 /* loginPortalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EE01E31BF8CAB6004BAFF5 /* loginPortalViewController.swift */; };
 		F44976661C3FE306003249EE /* alertViewFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44976651C3FE306003249EE /* alertViewFunction.swift */; };
+		F46DE14D1C60B87F006378E3 /* alertMessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DE14C1C60B87F006378E3 /* alertMessageTableViewController.swift */; };
 		F4ED42B61C5907C800632958 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4ED429F1C57818900632958 /* Alamofire.framework */; };
 		F4ED42B71C5907C800632958 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F4ED429F1C57818900632958 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -443,6 +444,7 @@
 		95E84377C3242EF109FBACC9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		995C6FD3B7162BE916BCC989 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F44976651C3FE306003249EE /* alertViewFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = alertViewFunction.swift; path = ../alertViewFunction.swift; sourceTree = "<group>"; };
+		F46DE14C1C60B87F006378E3 /* alertMessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = alertMessageTableViewController.swift; sourceTree = "<group>"; };
 		F4ED427C1C57813F00632958 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		F4ED42941C57818900632958 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -510,6 +512,7 @@
 				86EE01E11BF8C9BF004BAFF5 /* protectedPageViewController.swift */,
 				8640FBD91BEAA13E004EDEA5 /* newsViewController.swift */,
 				8640FBDB1BEAA2F4004EDEA5 /* homeViewController.swift */,
+				F46DE14C1C60B87F006378E3 /* alertMessageTableViewController.swift */,
 				8640FBAD1BEA7C5D004EDEA5 /* Assets.xcassets */,
 				8640FBB21BEA7C5D004EDEA5 /* Info.plist */,
 			);
@@ -1165,6 +1168,7 @@
 				8640FBDC1BEAA2F4004EDEA5 /* homeViewController.swift in Sources */,
 				86EE01E21BF8C9BF004BAFF5 /* protectedPageViewController.swift in Sources */,
 				8640FBDA1BEAA13E004EDEA5 /* newsViewController.swift in Sources */,
+				F46DE14D1C60B87F006378E3 /* alertMessageTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
