@@ -41,69 +41,62 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
             self.window?.rootViewController = exampleViewController
             self.window?.makeKeyAndVisible()
-                
+
             return true
         } else {
             Alamofire.request(.POST, dbURL, parameters: ["username": username!, "password": password!])
-                    .responseJSON { response in
+                .responseJSON { response in switch response.result {
+                case .Success(let JSON):
+                    let response = JSON as! [NSDictionary]
+                    if(response[0].valueForKey("success") != nil && response[0].valueForKey("success") as! Int == 0) {
                         
-                        let HTTPStatusCode = response.response?.statusCode
-                        let JSONResponse = response.result.value!
+                        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
                         
-                        if(!(HTTPStatusCode > 0)) {
-                            
+                        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                        let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("unprotectedEntryPoint") as! SWRevealViewController
+                        
+                        self.window?.rootViewController = exampleViewController
+                        self.window?.makeKeyAndVisible()
+
+                        break
+                        
+                    } else if(response[0].valueForKey("company") != nil &&
+                        response[0].valueForKey("id") != nil &&
+                        response[0].valueForKey("occupation") != nil &&
+                        response[0].valueForKey("system") != nil) {
+                        
                             self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
                             
                             let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                            let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("unprotectedEntryPoint") as! SWRevealViewController
+                            let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("protectedEntryPoint") as! SWRevealViewController
                             
                             self.window?.rootViewController = exampleViewController
                             self.window?.makeKeyAndVisible()
 
-                            return
                             
-                        } else if(!(HTTPStatusCode >= 200 && HTTPStatusCode < 300)) {
-                            
-                            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-                            
-                            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                            let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("unprotectedEntryPoint") as! SWRevealViewController
-                            
-                            self.window?.rootViewController = exampleViewController
-                            self.window?.makeKeyAndVisible()
+                        break
+                    } else {
+                        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+                        
+                        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                        let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("unprotectedEntryPoint") as! SWRevealViewController
+                        
+                        self.window?.rootViewController = exampleViewController
+                        self.window?.makeKeyAndVisible()
 
-                            return
-                            
-                        } else if(JSONResponse.valueForKey("company") != nil &&
-                            JSONResponse.valueForKey("id") != nil &&
-                            JSONResponse.valueForKey("occupation") != nil &&
-                            JSONResponse.valueForKey("system") != nil) {
-                                
-                                self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-                                
-                                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                                let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("protectedEntryPoint") as! SWRevealViewController
-                                
-                                self.window?.rootViewController = exampleViewController
-                                self.window?.makeKeyAndVisible()
-                                
-                                return
-                                
-                        } else { // No idea when code will reach this point, better be safe than sure
-                            
-                            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-                            
-                            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                            let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("unprotectedEntryPoint") as! SWRevealViewController
-                            
-                            self.window?.rootViewController = exampleViewController
-                            self.window?.makeKeyAndVisible()
-                            
-                            return
-                            
-                        }
-                }
-            
+                        break
+                    }
+                case .Failure(let error):
+                    self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+                    
+                    let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("unprotectedEntryPoint") as! SWRevealViewController
+                    
+                    self.window?.rootViewController = exampleViewController
+                    self.window?.makeKeyAndVisible()
+                    break
+                    }
+            }
         return true // Code shouldn't reach this point, no idea what will happen.
         }
     }

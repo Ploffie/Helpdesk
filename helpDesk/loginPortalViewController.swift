@@ -27,12 +27,9 @@ public class loginPortalViewController: UIViewController {
     
     private let dbURL:String = "http://wybren.haptotherapie-twente.nl/jsonlogin2.php"
     private let Alert = alertViewFunction()
-    public var loginReturn:Bool?
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
-    
     @IBOutlet weak var usernameTextfield: UITextField!
-    
     @IBOutlet weak var passwordTextfield: UITextField!
     
     let defaultData = NSUserDefaults.standardUserDefaults()
@@ -59,50 +56,36 @@ public class loginPortalViewController: UIViewController {
             self.presentViewController(Alert.create("Inloggen mislukt", message: "Vul a.u.b. een gebruikersnaam en wachtwoord in."), animated: true, completion: nil)
         } else {
             Alamofire.request(.POST, dbURL, parameters: ["username": username, "password": password])
-                .responseJSON { response in
-                    
-                    let HTTPStatusCode = response.response?.statusCode
-                    let JSONResponse = response.result.value!
-                    
-                    if(!(HTTPStatusCode > 0)) {
-                        self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: "Er is geen verbinding met de server. Heeft u een werkende internetverbinding?"), animated: true, completion: nil)
-                        return
-                        
-                    } else if(!(HTTPStatusCode >= 200 && HTTPStatusCode < 300)) {
-                        self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: "Er heeft zich een fout opgetreden (statuscode \(HTTPStatusCode))."), animated: true, completion: nil)
-                        return
-                        
-                    } else if(JSONResponse.valueForKey("company") != nil &&
-                              JSONResponse.valueForKey("id") != nil &&
-                              JSONResponse.valueForKey("occupation") != nil &&
-                              JSONResponse.valueForKey("system") != nil) {
-                            
-                                let responseCompany = JSONResponse.valueForKey("company")!
-                                let responseID = JSONResponse.valueForKey("id")!
-                                let responseOccupation = JSONResponse.valueForKey("occupation")!
-                                let responseSystem = JSONResponse.valueForKey("system")!
+                .responseJSON { response in switch response.result {
+                case .Success(let JSON):
+                    let response = JSON as! [NSDictionary]
+                    if(response[0].valueForKey("success") != nil && response[0].valueForKey("success") as! Int == 0) {
+                        self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: response[0].valueForKey("error_message") as! String), animated: true, completion: nil)
+                        break
+                    } else if(response[0].valueForKey("company") != nil &&
+                              response[0].valueForKey("id") != nil &&
+                              response[0].valueForKey("occupation") != nil &&
+                              response[0].valueForKey("system") != nil) {
                                 
                                 self.defaultData.setValue(username, forKey: "Username")
                                 self.defaultData.setValue(password, forKey: "Password")
                                 
-                                self.defaultData.setValue(responseCompany, forKey: "Company")
-                                self.defaultData.setValue(responseID, forKey: "ID")
-                                self.defaultData.setValue(responseOccupation, forKey: "Occupation")
-                                self.defaultData.setValue(responseSystem, forKey: "System")
+                                self.defaultData.setValue(response[0].valueForKey("company")!, forKey: "Company")
+                                self.defaultData.setValue(response[0].valueForKey("id")!, forKey: "ID")
+                                self.defaultData.setValue(response[0].valueForKey("occupation")!, forKey: "Occupation")
+                                self.defaultData.setValue(response[0].valueForKey("system")!, forKey: "System")
                                 
                                 self.defaultData.synchronize()
                                 self.performSegueWithIdentifier("goto_protected", sender: self)
-                                
-                                return
-
-                        } else if(JSONResponse.valueForKey("success") != nil &&
-                                  JSONResponse.valueForKey("success") as! Int == 0) {
-                            self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: JSONResponse.valueForKey("error_message") as! String), animated: true, completion: nil)
-                            return
+                                break
                     } else {
                         self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: "Er heeft zich een onbekende fout opgetreden."), animated: true, completion: nil)
-                        return
+                        break
                     }
+                case .Failure(let error):
+                    self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: "Er heeft zich een fout opgetreden (\(error)."), animated: true, completion: nil)
+                    break
+                }
             }
         }
         
@@ -115,51 +98,37 @@ public class loginPortalViewController: UIViewController {
             self.presentViewController(Alert.create("Inloggen mislukt", message: "Vul a.u.b. een gebruikersnaam en wachtwoord in."), animated: true, completion: nil)
         } else {
             Alamofire.request(.POST, dbURL, parameters: ["username": username, "password": password])
-                .responseJSON { response in
-                    
-                    let HTTPStatusCode = response.response?.statusCode
-                    let JSONResponse = response.result.value!
-                    
-                    if(!(HTTPStatusCode > 0)) {
-                        self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: "Er is geen verbinding met de server. Heeft u een werkende internetverbinding?"), animated: true, completion: nil)
-                        return
-                        
-                    } else if(!(HTTPStatusCode >= 200 && HTTPStatusCode < 300)) {
-                        self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: "Er heeft zich een fout opgetreden (statuscode \(HTTPStatusCode))."), animated: true, completion: nil)
-                        return
-                        
-                    } else if(JSONResponse.valueForKey("company") != nil &&
-                        JSONResponse.valueForKey("id") != nil &&
-                        JSONResponse.valueForKey("occupation") != nil &&
-                        JSONResponse.valueForKey("system") != nil) {
-                            
-                            let responseCompany = JSONResponse.valueForKey("company")!
-                            let responseID = JSONResponse.valueForKey("id")!
-                            let responseOccupation = JSONResponse.valueForKey("occupation")!
-                            let responseSystem = JSONResponse.valueForKey("system")!
+                .responseJSON { response in switch response.result {
+                case .Success(let JSON):
+                    let response = JSON as! [NSDictionary]
+                    if(response[0].valueForKey("success") != nil && response[0].valueForKey("success") as! Int == 0) {
+                        self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: response[0].valueForKey("error_message") as! String), animated: true, completion: nil)
+                        break
+                    } else if(response[0].valueForKey("company") != nil &&
+                        response[0].valueForKey("id") != nil &&
+                        response[0].valueForKey("occupation") != nil &&
+                        response[0].valueForKey("system") != nil) {
                             
                             self.defaultData.setValue(username, forKey: "Username")
                             self.defaultData.setValue(password, forKey: "Password")
                             
-                            self.defaultData.setValue(responseCompany, forKey: "Company")
-                            self.defaultData.setValue(responseID, forKey: "ID")
-                            self.defaultData.setValue(responseOccupation, forKey: "Occupation")
-                            self.defaultData.setValue(responseSystem, forKey: "System")
+                            self.defaultData.setValue(response[0].valueForKey("company")!, forKey: "Company")
+                            self.defaultData.setValue(response[0].valueForKey("id")!, forKey: "ID")
+                            self.defaultData.setValue(response[0].valueForKey("occupation")!, forKey: "Occupation")
+                            self.defaultData.setValue(response[0].valueForKey("system")!, forKey: "System")
                             
                             self.defaultData.synchronize()
                             self.performSegueWithIdentifier("goto_protected", sender: self)
                             
-                            return
-                            
-                    } else if(JSONResponse.valueForKey("success") != nil &&
-                        JSONResponse.valueForKey("success") as! Int == 0) {
-                            self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: JSONResponse.valueForKey("error_message") as! String), animated: true, completion: nil)
-                            return
+                            break
                     } else {
                         self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: "Er heeft zich een onbekende fout opgetreden."), animated: true, completion: nil)
-                        return
+                        break
                     }
-
+                case .Failure(let error):
+                    self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: "Er heeft zich een fout opgetreden (\(error)."), animated: true, completion: nil)
+                    break
+                    }
             }
         }
 
