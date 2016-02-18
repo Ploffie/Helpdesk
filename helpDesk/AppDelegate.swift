@@ -31,8 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let password = defaultData.stringForKey("Password")
         let dbURL = "http://wybren.haptotherapie-twente.nl/jsonlogin2.php"
         
-        if(defaultData.objectForKey("Username") == nil ||
-            defaultData.objectForKey("Password") == nil) {
+        if(defaultData.objectForKey("hasCredentialsSaved") == nil ||
+            defaultData.boolForKey("hasCredentialsSaved") == false) {
                 
             self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
                 
