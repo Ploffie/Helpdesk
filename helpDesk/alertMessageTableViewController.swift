@@ -7,27 +7,44 @@
 //
 
 import UIKit
+import Alamofire
 
 class alertMessageTableViewController: UITableViewController {
-
+    
+    private let defaultData = NSUserDefaults.standardUserDefaults()
+    
+    private let dbURL = "http://wybren.haptotherapie-twente.nl/getData.php"
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         
         if self.revealViewController() != nil {
             menuButton.target = self.revealViewController()
             menuButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        let company = self.defaultData.valueForKey("Company")!
+        let id = self.defaultData.valueForKey("ID")!
+        let occupation = self.defaultData.valueForKey("Occupation")!
+        let system = self.defaultData.valueForKey("System")!
+        
+        Alamofire.request(.POST, dbURL, parameters: ["companyID": company, "userID": id,"occupationID": occupation, "systemID": system])
+            .responseJSON { response in switch response.result {
+            case .Success(let JSON):
+                let response = JSON as! NSDictionary
+                let responseMessages = response.valueForKey("messages")![0] // Has keys "message", "title", and "username"
+                let amountOfMessages = response.valueForKey("amountOfMessages")! // Has keys "amountOfMessages" (handled here), and "messages" (handled above)
+                break
+            case .Failure(_):
+                // Handle failure
+                debugPrint(response.request)
+                print("---------- FAILURE ----------")
+                break
+                }
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {
