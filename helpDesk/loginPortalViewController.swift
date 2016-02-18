@@ -9,9 +9,6 @@
 /* 
  * TODO:
  *
- * Optimise memory usage, create one alertView and customise later
- * Instead of defining a new one every time
- *
  * Optimisation, handle login return statement outside of
  * handleLogin function but in login class instead
  *
@@ -50,41 +47,57 @@ public class loginPortalViewController: UIViewController {
     }
     
     @IBAction func signInButton(sender: UIButton) {
+        
         let username:String = usernameTextfield.text!
         let password:String = passwordTextfield.text!
+        
         if ( username == "" || password == "" ) {
+            
             self.presentViewController(Alert.create("Inloggen mislukt", message: "Vul a.u.b. een gebruikersnaam en wachtwoord in."), animated: true, completion: nil)
+            
         } else {
             Alamofire.request(.POST, dbURL, parameters: ["username": username, "password": password])
                 .responseJSON { response in switch response.result {
+                    
                 case .Success(let JSON):
-                    let response = JSON as! [NSDictionary]
-                    if(response[0].valueForKey("success") != nil && response[0].valueForKey("success") as! Int == 0) {
-                        self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: response[0].valueForKey("error_message") as! String), animated: true, completion: nil)
-                        break
-                    } else if(response[0].valueForKey("company") != nil &&
-                              response[0].valueForKey("id") != nil &&
-                              response[0].valueForKey("occupation") != nil &&
-                              response[0].valueForKey("system") != nil) {
-                                
-                                self.defaultData.setValue(username, forKey: "Username")
-                                self.defaultData.setValue(password, forKey: "Password")
-                                
-                                self.defaultData.setValue(response[0].valueForKey("company")!, forKey: "Company")
-                                self.defaultData.setValue(response[0].valueForKey("id")!, forKey: "ID")
-                                self.defaultData.setValue(response[0].valueForKey("occupation")!, forKey: "Occupation")
-                                self.defaultData.setValue(response[0].valueForKey("system")!, forKey: "System")
-                                
-                                self.defaultData.synchronize()
-                                self.performSegueWithIdentifier("goto_protected", sender: self)
-                                break
+                    
+                    let response = JSON as! NSDictionary
+                    
+                    if(response.valueForKey("error_message") != nil) {
+                        
+                        self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: response.valueForKey("error_message")!                           as! String), animated: true, completion: nil)
+                        
+                    } else if(response.valueForKey("company") != nil &&
+                        response.valueForKey("id") != nil &&
+                        response.valueForKey("occupation") != nil &&
+                        response.valueForKey("system") != nil) {
+                            
+                            self.defaultData.setValue(username, forKey: "Username")
+                            self.defaultData.setValue(password, forKey: "Password")
+                            
+                            self.defaultData.setValue(response.valueForKey("company")!, forKey: "Company")
+                            self.defaultData.setValue(response.valueForKey("id")!, forKey: "ID")
+                            self.defaultData.setValue(response.valueForKey("occupation")!, forKey: "Occupation")
+                            self.defaultData.setValue(response.valueForKey("system")!, forKey: "System")
+                            
+                            self.defaultData.synchronize()
+                            self.performSegueWithIdentifier("goto_protected", sender: self)
+                            break
+                            
                     } else {
+                        
                         self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: "Er heeft zich een onbekende fout opgetreden."), animated: true, completion: nil)
-                        break
+                        print(response.debugDescription)
+                        break // Neat error handling is neat
+                        
                     }
-                case .Failure(let error):
-                    self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: "Er heeft zich een fout opgetreden (\(error)."), animated: true, completion: nil)
                     break
+                case .Failure(_):
+                    
+                    self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: "Er heeft zich een fout opgetreden. Heeft u een werkende internetverbinding?"), animated: true, completion: nil)
+                    print(response.debugDescription)
+                    break
+                    
                 }
             }
         }
@@ -92,42 +105,58 @@ public class loginPortalViewController: UIViewController {
     }
     
     @IBAction func passwordDidEndOnExit(sender: UITextField) {
+        
         let username:String = usernameTextfield.text!
         let password:String = passwordTextfield.text!
+        
         if ( username == "" || password == "" ) {
+            
             self.presentViewController(Alert.create("Inloggen mislukt", message: "Vul a.u.b. een gebruikersnaam en wachtwoord in."), animated: true, completion: nil)
+            
         } else {
+            
             Alamofire.request(.POST, dbURL, parameters: ["username": username, "password": password])
                 .responseJSON { response in switch response.result {
+                    
                 case .Success(let JSON):
-                    let response = JSON as! [NSDictionary]
-                    if(response[0].valueForKey("success") != nil && response[0].valueForKey("success") as! Int == 0) {
-                        self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: response[0].valueForKey("error_message") as! String), animated: true, completion: nil)
-                        break
-                    } else if(response[0].valueForKey("company") != nil &&
-                        response[0].valueForKey("id") != nil &&
-                        response[0].valueForKey("occupation") != nil &&
-                        response[0].valueForKey("system") != nil) {
+                    
+                    let response = JSON as! NSDictionary
+                    
+                    if(response.valueForKey("error_message") != nil) {
+                        
+                        self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: response.valueForKey("error_message")!                           as! String), animated: true, completion: nil)
+                        
+                    } else if(response.valueForKey("company") != nil &&
+                           response.valueForKey("id") != nil &&
+                           response.valueForKey("occupation") != nil &&
+                           response.valueForKey("system") != nil) {
                             
                             self.defaultData.setValue(username, forKey: "Username")
                             self.defaultData.setValue(password, forKey: "Password")
                             
-                            self.defaultData.setValue(response[0].valueForKey("company")!, forKey: "Company")
-                            self.defaultData.setValue(response[0].valueForKey("id")!, forKey: "ID")
-                            self.defaultData.setValue(response[0].valueForKey("occupation")!, forKey: "Occupation")
-                            self.defaultData.setValue(response[0].valueForKey("system")!, forKey: "System")
+                            self.defaultData.setValue(response.valueForKey("company")!, forKey: "Company")
+                            self.defaultData.setValue(response.valueForKey("id")!, forKey: "ID")
+                            self.defaultData.setValue(response.valueForKey("occupation")!, forKey: "Occupation")
+                            self.defaultData.setValue(response.valueForKey("system")!, forKey: "System")
                             
                             self.defaultData.synchronize()
                             self.performSegueWithIdentifier("goto_protected", sender: self)
-                            
                             break
+
                     } else {
+                        
                         self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: "Er heeft zich een onbekende fout opgetreden."), animated: true, completion: nil)
-                        break
+                        print(response.debugDescription)
+                        break // Neat error handling is neat
+                        
                     }
-                case .Failure(let error):
-                    self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: "Er heeft zich een fout opgetreden (\(error)."), animated: true, completion: nil)
                     break
+                case .Failure(_):
+                    
+                    self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: "Er heeft zich een fout opgetreden. Heeft u een werkende internetverbinding?"), animated: true, completion: nil)
+                    print(response.debugDescription)
+                    break
+                    
                     }
             }
         }
@@ -138,6 +167,9 @@ public class loginPortalViewController: UIViewController {
         self.presentViewController(Alert.create("Registreren", message: "Neem contact op met Amerion IT om te registreren."), animated: true, completion: nil)
         
     }
+    
+    //public function handleLoginSuccess(
+    
 }
 
 

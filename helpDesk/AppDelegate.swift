@@ -47,8 +47,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Alamofire.request(.POST, dbURL, parameters: ["username": username!, "password": password!])
                 .responseJSON { response in switch response.result {
                 case .Success(let JSON):
-                    let response = JSON as! [NSDictionary]
-                    if(response[0].valueForKey("success") != nil && response[0].valueForKey("success") as! Int == 0) {
+                    let response = JSON as! NSDictionary
+                    
+                    if(response.valueForKey("error_message") != nil) {
                         
                         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
                         
@@ -58,13 +59,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         self.window?.rootViewController = exampleViewController
                         self.window?.makeKeyAndVisible()
 
-                        break
-                        
-                    } else if(response[0].valueForKey("company") != nil &&
-                        response[0].valueForKey("id") != nil &&
-                        response[0].valueForKey("occupation") != nil &&
-                        response[0].valueForKey("system") != nil) {
-                        
+                    } else if(response.valueForKey("company") != nil &&
+                        response.valueForKey("id") != nil &&
+                        response.valueForKey("occupation") != nil &&
+                        response.valueForKey("system") != nil) {
+                            
                             self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
                             
                             let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -73,8 +72,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             self.window?.rootViewController = exampleViewController
                             self.window?.makeKeyAndVisible()
 
+                            break
                             
-                        break
                     } else {
                         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
                         
@@ -83,10 +82,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                         self.window?.rootViewController = exampleViewController
                         self.window?.makeKeyAndVisible()
-
-                        break
+                        print(response.debugDescription)
+                        break // Neat error handling is neat
                     }
-                case .Failure(let error):
+                    
+                    break
+                case .Failure(_):
                     self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
                     
                     let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -94,8 +95,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     self.window?.rootViewController = exampleViewController
                     self.window?.makeKeyAndVisible()
+                    print(response.debugDescription)
                     break
-                    }
+
+                }
             }
         return true // Code shouldn't reach this point, no idea what will happen.
         }
