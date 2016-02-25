@@ -45,7 +45,7 @@ public class protectedPageViewController: UIViewController {
     override public func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         
-        self.userNameLabel.text = ("Welkom, \(self.defaultData.valueForKey("Username") as! String)!")
+        self.userNameLabel.text = ("Welkom, \(self.defaultData.valueForKey(dataUsername) as! String)!")
     }
     
     @IBAction func signOutTapped(sender: UIButton) {
@@ -59,12 +59,12 @@ public class protectedPageViewController: UIViewController {
     public func handleLogout() -> Void {
         let appDomain = NSBundle.mainBundle().bundleIdentifier
         NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
-        defaultData.removeObjectForKey("Username")
-        defaultData.removeObjectForKey("Password")
-        defaultData.removeObjectForKey("Company")
-        defaultData.removeObjectForKey("ID")
-        defaultData.removeObjectForKey("Occupation")
-        defaultData.removeObjectForKey("System")
+        defaultData.removeObjectForKey(dataUsername)
+        defaultData.removeObjectForKey(dataPassword)
+        defaultData.removeObjectForKey(dataCompany)
+        defaultData.removeObjectForKey(dataUser)
+        defaultData.removeObjectForKey(dataOccupation)
+        defaultData.removeObjectForKey(dataSystem)
         return
     }
     

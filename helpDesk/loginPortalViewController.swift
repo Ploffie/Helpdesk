@@ -6,15 +6,6 @@
 //  Copyright © 2015 Amerion IT. All rights reserved.
 //
 
-/* 
- * TODO:
- *
- * Optimisation, handle login return statement outside of
- * handleLogin function but in login class instead
- *
- * Ask whether user wants to save credentials or not
- */
-
 import UIKit
 import Alamofire
 
@@ -22,10 +13,9 @@ public class loginPortalViewController: UIViewController {
     
     // All programmed
     
-    private let dbURL:String = "http://wybren.haptotherapie-twente.nl/jsonlogin2.php"
     private let Alert = alertViewFunction()
     
-    private let alertController = UIAlertController(title: "Wachtwoord onthouden", message: "Wilt u uw gebruikersnaam en wachtwoord opslaan? De app zal dan automatisch inloggen wanneer deze wordt geopend.", preferredStyle: .Alert)
+    private let alertController = UIAlertController(title: savePasswordTitle, message: savePasswordMessage, preferredStyle: .Alert)
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var usernameTextfield: UITextField!
@@ -55,57 +45,57 @@ public class loginPortalViewController: UIViewController {
         
         if ( username == "" || password == "" ) {
             
-            self.presentViewController(Alert.create("Inloggen mislukt", message: "Vul a.u.b. een gebruikersnaam en wachtwoord in."), animated: true, completion: nil)
+            self.presentViewController(Alert.create(errorTitle, message: errorMessages[0]), animated: true, completion: nil)
             
         } else {
-            Alamofire.request(.POST, dbURL, parameters: ["username": username, "password": password])
+            Alamofire.request(.POST, loginURL, parameters: [requestUsername: username, requestPassword: password])
                 .responseJSON { response in switch response.result {
                     
                 case .Success(let JSON):
                     
                     let response = JSON as! NSDictionary
                     
-                    if(response.valueForKey("error_message") != nil) {
+                    if(response.valueForKey(responseError) != nil) {
                         
-                        self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: response.valueForKey("error_message")!                           as! String), animated: true, completion: nil)
+                        self.presentViewController(alertViewFunction().create(errorTitle, message: response.valueForKey(responseError)! as! String), animated: true, completion: nil)
                         
-                    } else if(response.valueForKey("company") != nil &&
-                        response.valueForKey("id") != nil &&
-                        response.valueForKey("occupation") != nil &&
-                        response.valueForKey("system") != nil) {
+                    } else if(response.valueForKey(responseCompany) != nil &&
+                        response.valueForKey(responseUser) != nil &&
+                        response.valueForKey(responseOccupation) != nil &&
+                        response.valueForKey(responseSystem) != nil) {
                             
-                            if(self.defaultData.objectForKey("hasCredentialsSaved") == nil) {
+                            if(self.defaultData.objectForKey(dataCredentialsSaved) == nil) {
                             
                             let rememberPasswordAction = UIAlertAction(title: "Ja", style: UIAlertActionStyle.Default) {
                                 UIAlertAction in
-                                self.defaultData.setValue(username, forKey: "Username")
-                                self.defaultData.setValue(password, forKey: "Password")
+                                self.defaultData.setValue(username, forKey: dataUsername)
+                                self.defaultData.setValue(password, forKey: dataPassword)
                                 
-                                self.defaultData.setBool(true, forKey: "hasCredentialsSaved")
+                                self.defaultData.setBool(true, forKey: dataCredentialsSaved)
                                 
-                                self.defaultData.setValue(response.valueForKey("company")!, forKey: "Company")
-                                self.defaultData.setValue(response.valueForKey("id")!, forKey: "ID")
-                                self.defaultData.setValue(response.valueForKey("occupation")!, forKey: "Occupation")
-                                self.defaultData.setValue(response.valueForKey("system")!, forKey: "System")
+                                self.defaultData.setValue(response.valueForKey(responseCompany)!, forKey: dataCompany)
+                                self.defaultData.setValue(response.valueForKey(responseUser)!, forKey: dataUser)
+                                self.defaultData.setValue(response.valueForKey(responseOccupation)!, forKey: dataOccupation)
+                                self.defaultData.setValue(response.valueForKey(responseSystem)!, forKey: dataSystem)
                                 
                                 self.defaultData.synchronize()
-                                self.performSegueWithIdentifier("goto_protected", sender: self)
+                                self.performSegueWithIdentifier(gotoProtected, sender: self)
                             }
                             
                             let noRememberPasswordAction = UIAlertAction(title: "Nee", style: UIAlertActionStyle.Default) {
                                 UIAlertAction in
-                                self.defaultData.setValue(username, forKey: "Username")
-                                self.defaultData.setValue(password, forKey: "Password")
+                                self.defaultData.setValue(username, forKey: dataUsername)
+                                self.defaultData.setValue(password, forKey: dataPassword)
                                 
-                                self.defaultData.setBool(false, forKey: "hasCredentialsSaved")
+                                self.defaultData.setBool(false, forKey: dataCredentialsSaved)
                                 
-                                self.defaultData.setValue(response.valueForKey("company")!, forKey: "Company")
-                                self.defaultData.setValue(response.valueForKey("id")!, forKey: "ID")
-                                self.defaultData.setValue(response.valueForKey("occupation")!, forKey: "Occupation")
-                                self.defaultData.setValue(response.valueForKey("system")!, forKey: "System")
+                                self.defaultData.setValue(response.valueForKey(responseCompany)!, forKey: dataCompany)
+                                self.defaultData.setValue(response.valueForKey(responseUser)!, forKey: dataUser)
+                                self.defaultData.setValue(response.valueForKey(responseOccupation)!, forKey: dataOccupation)
+                                self.defaultData.setValue(response.valueForKey(responseSystem)!, forKey: dataSystem)
                                 
                                 self.defaultData.synchronize()
-                                self.performSegueWithIdentifier("goto_protected", sender: self)
+                                self.performSegueWithIdentifier(gotoProtected, sender: self)
                             }
                             
                             self.alertController.addAction(noRememberPasswordAction)
@@ -114,23 +104,23 @@ public class loginPortalViewController: UIViewController {
                             self.presentViewController(self.alertController, animated: true, completion: nil)
                                 
                             } else {
-                                self.defaultData.setValue(username, forKey: "Username")
-                                self.defaultData.setValue(password, forKey: "Password")
+                                self.defaultData.setValue(username, forKey: dataUsername)
+                                self.defaultData.setValue(password, forKey: dataPassword)
 
-                                self.defaultData.setValue(response.valueForKey("company")!, forKey: "Company")
-                                self.defaultData.setValue(response.valueForKey("id")!, forKey: "ID")
-                                self.defaultData.setValue(response.valueForKey("occupation")!, forKey: "Occupation")
-                                self.defaultData.setValue(response.valueForKey("system")!, forKey: "System")
+                                self.defaultData.setValue(response.valueForKey(responseCompany)!, forKey: dataCompany)
+                                self.defaultData.setValue(response.valueForKey(responseUser)!, forKey: dataUser)
+                                self.defaultData.setValue(response.valueForKey(responseOccupation)!, forKey: dataOccupation)
+                                self.defaultData.setValue(response.valueForKey(responseSystem)!, forKey: dataSystem)
                                 
                                 self.defaultData.synchronize()
-                                self.performSegueWithIdentifier("goto_protected", sender: self)
+                                self.performSegueWithIdentifier(gotoProtected, sender: self)
                             }
                             
                             break
                             
                     } else {
                         
-                        self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: "Er heeft zich een onbekende fout opgetreden."), animated: true, completion: nil)
+                        self.presentViewController(alertViewFunction().create(errorTitle, message: errorMessages[1]), animated: true, completion: nil)
                         print(response.debugDescription)
                         break // Neat error handling is neat
                         
@@ -138,7 +128,7 @@ public class loginPortalViewController: UIViewController {
                     break
                 case .Failure(_):
                     
-                    self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: "Er heeft zich een fout opgetreden. Heeft u een werkende internetverbinding?"), animated: true, completion: nil)
+                    self.presentViewController(alertViewFunction().create(errorTitle, message: errorMessages[2]), animated: true, completion: nil)
                     print(response.debugDescription)
                     break
                     
@@ -155,58 +145,57 @@ public class loginPortalViewController: UIViewController {
         
         if ( username == "" || password == "" ) {
             
-            self.presentViewController(Alert.create("Inloggen mislukt", message: "Vul a.u.b. een gebruikersnaam en wachtwoord in."), animated: true, completion: nil)
+            self.presentViewController(Alert.create(errorTitle, message: errorMessages[0]), animated: true, completion: nil)
             
         } else {
-            
-            Alamofire.request(.POST, dbURL, parameters: ["username": username, "password": password])
+            Alamofire.request(.POST, loginURL, parameters: [requestUsername: username, requestPassword: password])
                 .responseJSON { response in switch response.result {
                     
                 case .Success(let JSON):
                     
                     let response = JSON as! NSDictionary
                     
-                    if(response.valueForKey("error_message") != nil) {
+                    if(response.valueForKey(responseError) != nil) {
                         
-                        self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: response.valueForKey("error_message")!                           as! String), animated: true, completion: nil)
+                        self.presentViewController(alertViewFunction().create(errorTitle, message: response.valueForKey(responseError)! as! String), animated: true, completion: nil)
                         
-                    } else if(response.valueForKey("company") != nil &&
-                        response.valueForKey("id") != nil &&
-                        response.valueForKey("occupation") != nil &&
-                        response.valueForKey("system") != nil) {
+                    } else if(response.valueForKey(responseCompany) != nil &&
+                        response.valueForKey(responseUser) != nil &&
+                        response.valueForKey(responseOccupation) != nil &&
+                        response.valueForKey(responseSystem) != nil) {
                             
-                            if(self.defaultData.objectForKey("hasCredentialsSaved") == nil) {
+                            if(self.defaultData.objectForKey(dataCredentialsSaved) == nil) {
                                 
                                 let rememberPasswordAction = UIAlertAction(title: "Ja", style: UIAlertActionStyle.Default) {
                                     UIAlertAction in
-                                    self.defaultData.setValue(username, forKey: "Username")
-                                    self.defaultData.setValue(password, forKey: "Password")
+                                    self.defaultData.setValue(username, forKey: dataUsername)
+                                    self.defaultData.setValue(password, forKey: dataPassword)
                                     
-                                    self.defaultData.setBool(true, forKey: "hasCredentialsSaved")
+                                    self.defaultData.setBool(true, forKey: dataCredentialsSaved)
                                     
-                                    self.defaultData.setValue(response.valueForKey("company")!, forKey: "Company")
-                                    self.defaultData.setValue(response.valueForKey("id")!, forKey: "ID")
-                                    self.defaultData.setValue(response.valueForKey("occupation")!, forKey: "Occupation")
-                                    self.defaultData.setValue(response.valueForKey("system")!, forKey: "System")
+                                    self.defaultData.setValue(response.valueForKey(responseCompany)!, forKey: dataCompany)
+                                    self.defaultData.setValue(response.valueForKey(responseUser)!, forKey: dataUser)
+                                    self.defaultData.setValue(response.valueForKey(responseOccupation)!, forKey: dataOccupation)
+                                    self.defaultData.setValue(response.valueForKey(responseSystem)!, forKey: dataSystem)
                                     
                                     self.defaultData.synchronize()
-                                    self.performSegueWithIdentifier("goto_protected", sender: self)
+                                    self.performSegueWithIdentifier(gotoProtected, sender: self)
                                 }
                                 
                                 let noRememberPasswordAction = UIAlertAction(title: "Nee", style: UIAlertActionStyle.Default) {
                                     UIAlertAction in
-                                    self.defaultData.setValue(username, forKey: "Username")
-                                    self.defaultData.setValue(password, forKey: "Password")
+                                    self.defaultData.setValue(username, forKey: dataUsername)
+                                    self.defaultData.setValue(password, forKey: dataPassword)
                                     
-                                    self.defaultData.setBool(false, forKey: "hasCredentialsSaved")
+                                    self.defaultData.setBool(false, forKey: dataCredentialsSaved)
                                     
-                                    self.defaultData.setValue(response.valueForKey("company")!, forKey: "Company")
-                                    self.defaultData.setValue(response.valueForKey("id")!, forKey: "ID")
-                                    self.defaultData.setValue(response.valueForKey("occupation")!, forKey: "Occupation")
-                                    self.defaultData.setValue(response.valueForKey("system")!, forKey: "System")
+                                    self.defaultData.setValue(response.valueForKey(responseCompany)!, forKey: dataCompany)
+                                    self.defaultData.setValue(response.valueForKey(responseUser)!, forKey: dataUser)
+                                    self.defaultData.setValue(response.valueForKey(responseOccupation)!, forKey: dataOccupation)
+                                    self.defaultData.setValue(response.valueForKey(responseSystem)!, forKey: dataSystem)
                                     
                                     self.defaultData.synchronize()
-                                    self.performSegueWithIdentifier("goto_protected", sender: self)
+                                    self.performSegueWithIdentifier(gotoProtected, sender: self)
                                 }
                                 
                                 self.alertController.addAction(noRememberPasswordAction)
@@ -215,23 +204,23 @@ public class loginPortalViewController: UIViewController {
                                 self.presentViewController(self.alertController, animated: true, completion: nil)
                                 
                             } else {
-                                self.defaultData.setValue(username, forKey: "Username")
-                                self.defaultData.setValue(password, forKey: "Password")
+                                self.defaultData.setValue(username, forKey: dataUsername)
+                                self.defaultData.setValue(password, forKey: dataPassword)
                                 
-                                self.defaultData.setValue(response.valueForKey("company")!, forKey: "Company")
-                                self.defaultData.setValue(response.valueForKey("id")!, forKey: "ID")
-                                self.defaultData.setValue(response.valueForKey("occupation")!, forKey: "Occupation")
-                                self.defaultData.setValue(response.valueForKey("system")!, forKey: "System")
+                                self.defaultData.setValue(response.valueForKey(responseCompany)!, forKey: dataCompany)
+                                self.defaultData.setValue(response.valueForKey(responseUser)!, forKey: dataUser)
+                                self.defaultData.setValue(response.valueForKey(responseOccupation)!, forKey: dataOccupation)
+                                self.defaultData.setValue(response.valueForKey(responseSystem)!, forKey: dataSystem)
                                 
                                 self.defaultData.synchronize()
-                                self.performSegueWithIdentifier("goto_protected", sender: self)
+                                self.performSegueWithIdentifier(gotoProtected, sender: self)
                             }
                             
                             break
                             
                     } else {
                         
-                        self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: "Er heeft zich een onbekende fout opgetreden."), animated: true, completion: nil)
+                        self.presentViewController(alertViewFunction().create(errorTitle, message: errorMessages[1]), animated: true, completion: nil)
                         print(response.debugDescription)
                         break // Neat error handling is neat
                         
@@ -239,22 +228,19 @@ public class loginPortalViewController: UIViewController {
                     break
                 case .Failure(_):
                     
-                    self.presentViewController(alertViewFunction().create("Inloggen mislukt", message: "Er heeft zich een fout opgetreden. Heeft u een werkende internetverbinding?"), animated: true, completion: nil)
+                    self.presentViewController(alertViewFunction().create(errorTitle, message: errorMessages[2]), animated: true, completion: nil)
                     print(response.debugDescription)
                     break
                     
                     }
             }
         }
-
     }
 
     @IBAction func signUpButton(sender: UIButton) {
-        self.presentViewController(Alert.create("Registreren", message: "Neem contact op met Amerion IT om te registreren."), animated: true, completion: nil)
+        self.presentViewController(Alert.create(registerTitle, message: registerMessage), animated: true, completion: nil)
         
     }
-    
-    //public function handleLoginSuccess(
     
 }
 

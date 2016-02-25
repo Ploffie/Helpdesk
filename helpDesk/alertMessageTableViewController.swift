@@ -24,27 +24,6 @@ class alertMessageTableViewController: UITableViewController {
             menuButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
-        
-        let company = self.defaultData.valueForKey("Company")!
-        let id = self.defaultData.valueForKey("ID")!
-        let occupation = self.defaultData.valueForKey("Occupation")!
-        let system = self.defaultData.valueForKey("System")!
-        
-        Alamofire.request(.POST, dbURL, parameters: ["companyID": company, "userID": id,"occupationID": occupation, "systemID": system])
-            .responseJSON { response in switch response.result {
-            case .Success(let JSON):
-                let response = JSON as! NSDictionary
-                let responseMessages = response.valueForKey("messages")![0] // Has keys "message", "title", and "username"
-                let amountOfMessages = response.valueForKey("amountOfMessages")! // Has keys "amountOfMessages" (handled here), and "messages" (handled above)
-                break
-            case .Failure(_):
-                // Handle failure
-                debugPrint(response.request)
-                print("---------- FAILURE ----------")
-                break
-                }
-        }
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -55,24 +34,26 @@ class alertMessageTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return self.defaultData.valueForKey("Messages")!.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        let cellIdentifier = "alertMessageTableViewCell"
+        let alertMessages = self.defaultData.valueForKey("Messages")!
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! alertMessageTableViewCell
 
-        // Configure the cell...
+        let messageTitle = alertMessages[indexPath.row].valueForKey("title") as! String
+        
+        cell.titleLabel.text = messageTitle
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

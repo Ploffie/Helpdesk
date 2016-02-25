@@ -27,50 +27,66 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         // Override point for customization after application launch.
-        let username = defaultData.stringForKey("Username")
-        let password = defaultData.stringForKey("Password")
-        let dbURL = "http://wybren.haptotherapie-twente.nl/jsonlogin2.php"
+        let username = defaultData.stringForKey(dataUsername)
+        let password = defaultData.stringForKey(dataPassword)
         
-        if(defaultData.objectForKey("hasCredentialsSaved") == nil ||
-            defaultData.boolForKey("hasCredentialsSaved") == false) {
+        if(defaultData.objectForKey(dataCredentialsSaved) == nil ||
+            defaultData.boolForKey(dataCredentialsSaved) == false) {
                 
             self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
                 
             let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("unprotectedEntryPoint") as! SWRevealViewController
+            let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier(entryUnprotected) as! SWRevealViewController
                 
             self.window?.rootViewController = exampleViewController
             self.window?.makeKeyAndVisible()
 
             return true
         } else {
-            Alamofire.request(.POST, dbURL, parameters: ["username": username!, "password": password!])
+            Alamofire.request(.POST, loginURL, parameters: [requestUsername: username!, requestPassword: password!])
                 .responseJSON { response in switch response.result {
                 case .Success(let JSON):
                     let response = JSON as! NSDictionary
                     
-                    if(response.valueForKey("error_message") != nil) {
+                    if(response.valueForKey(responseError) != nil) {
                         
                         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
                         
                         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                        let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("unprotectedEntryPoint") as! SWRevealViewController
+                        let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier(entryUnprotected) as! SWRevealViewController
                         
                         self.window?.rootViewController = exampleViewController
                         self.window?.makeKeyAndVisible()
 
-                    } else if(response.valueForKey("company") != nil &&
-                        response.valueForKey("id") != nil &&
-                        response.valueForKey("occupation") != nil &&
-                        response.valueForKey("system") != nil) {
+                    } else if(response.valueForKey(responseCompany) != nil &&
+                        response.valueForKey(responseUser) != nil &&
+                        response.valueForKey(responseOccupation) != nil &&
+                        response.valueForKey(responseSystem) != nil) {
+                            
+                            Alamofire.request(.POST, messageURL, parameters: [requestCompany: response.valueForKey(dataCompany)!, requestUser: response.valueForKey(dataUser)!, requestOccupation: response.valueForKey(dataOccupation)!, requestSystem: response.valueForKey(dataSystem)!])
+                                .responseJSON { response in switch response.result {
+                                case .Success(let JSON):
+                                    // TODO: Check if error message
+                                    let response = JSON as! NSDictionary
+                                    let responseMessageList = response.valueForKey(responseMessages)!
+                                    self.defaultData.setValue(responseMessageList, forKey: dataMessages)
+                                    break
+                                case .Failure(_):
+                                    // Handle failure
+                                    debugPrint(response.request)
+                                    break
+                                    }
+                            }
                             
                             self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
                             
                             let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                            let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("protectedEntryPoint") as! SWRevealViewController
+                            let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier(entryProtected) as! SWRevealViewController
                             
                             self.window?.rootViewController = exampleViewController
                             self.window?.makeKeyAndVisible()
+                            
+                            self.defaultData.synchronize()
 
                             break
                             
@@ -78,7 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
                         
                         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                        let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("unprotectedEntryPoint") as! SWRevealViewController
+                        let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier(entryUnprotected) as! SWRevealViewController
                         
                         self.window?.rootViewController = exampleViewController
                         self.window?.makeKeyAndVisible()
@@ -91,7 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
                     
                     let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier("unprotectedEntryPoint") as! SWRevealViewController
+                    let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier(entryUnprotected) as! SWRevealViewController
                     
                     self.window?.rootViewController = exampleViewController
                     self.window?.makeKeyAndVisible()
