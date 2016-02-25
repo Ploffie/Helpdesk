@@ -168,39 +168,43 @@ public class loginPortalViewController: UIViewController {
                                 
                                 let rememberPasswordAction = UIAlertAction(title: "Ja", style: UIAlertActionStyle.Default) {
                                     UIAlertAction in
-                                    self.defaultData.setValue(username, forKey: dataUsername)
-                                    self.defaultData.setValue(password, forKey: dataPassword)
                                     
                                     self.defaultData.setBool(true, forKey: dataCredentialsSaved)
-                                    
-                                    self.defaultData.setValue(response.valueForKey(responseCompany)!, forKey: dataCompany)
-                                    self.defaultData.setValue(response.valueForKey(responseUser)!, forKey: dataUser)
-                                    self.defaultData.setValue(response.valueForKey(responseOccupation)!, forKey: dataOccupation)
-                                    self.defaultData.setValue(response.valueForKey(responseSystem)!, forKey: dataSystem)
-                                    
-                                    self.defaultData.synchronize()
-                                    self.performSegueWithIdentifier(gotoProtected, sender: self)
                                 }
                                 
                                 let noRememberPasswordAction = UIAlertAction(title: "Nee", style: UIAlertActionStyle.Default) {
                                     UIAlertAction in
-                                    self.defaultData.setValue(username, forKey: dataUsername)
-                                    self.defaultData.setValue(password, forKey: dataPassword)
                                     
                                     self.defaultData.setBool(false, forKey: dataCredentialsSaved)
-                                    
-                                    self.defaultData.setValue(response.valueForKey(responseCompany)!, forKey: dataCompany)
-                                    self.defaultData.setValue(response.valueForKey(responseUser)!, forKey: dataUser)
-                                    self.defaultData.setValue(response.valueForKey(responseOccupation)!, forKey: dataOccupation)
-                                    self.defaultData.setValue(response.valueForKey(responseSystem)!, forKey: dataSystem)
-                                    
-                                    self.defaultData.synchronize()
-                                    self.performSegueWithIdentifier(gotoProtected, sender: self)
                                 }
                                 
                                 self.alertController.addAction(noRememberPasswordAction)
                                 self.alertController.addAction(rememberPasswordAction)
                                 
+                                self.defaultData.setValue(username, forKey: dataUsername)
+                                self.defaultData.setValue(password, forKey: dataPassword)
+
+                                self.defaultData.setValue(response.valueForKey(responseCompany)!, forKey: dataCompany)
+                                self.defaultData.setValue(response.valueForKey(responseUser)!, forKey: dataUser)
+                                self.defaultData.setValue(response.valueForKey(responseOccupation)!, forKey: dataOccupation)
+                                self.defaultData.setValue(response.valueForKey(responseSystem)!, forKey: dataSystem)
+                                
+                                // MARK
+                                Alamofire.request(.POST, messageURL, parameters: [requestCompany: response.valueForKey(responseCompany)!, requestUser: response.valueForKey(responseUser)!, requestOccupation: response.valueForKey(responseOccupation)!, requestSystem: response.valueForKey(responseSystem)!])
+                                    .responseJSON { response in switch response.result {
+                                    case .Success(let JSON):
+                                        let response = JSON as! NSDictionary
+                                        let responseMessageList = response.valueForKey(responseMessages)!
+                                        self.defaultData.setValue(responseMessageList, forKey: dataMessages)
+                                        break
+                                    case .Failure(_):
+                                        debugPrint(response.request)
+                                        break
+                                    }
+                                }
+                                
+                                self.defaultData.synchronize()
+                                self.performSegueWithIdentifier(gotoProtected, sender: self)
                                 self.presentViewController(self.alertController, animated: true, completion: nil)
                                 
                             } else {

@@ -52,6 +52,8 @@ public class protectedPageViewController: UIViewController {
         handleLogout()
     }
     
+    
+    
     @IBAction func changePasswordButtonTapped(sender: AnyObject) {
         self.presentViewController(Alert.create("Wachtwoord wijzigen", message: "Neem contact op met Amerion IT om uw wachtwoord te wijzigen."), animated: true, completion: nil)
     }

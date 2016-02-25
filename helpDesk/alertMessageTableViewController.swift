@@ -13,7 +13,6 @@ class alertMessageTableViewController: UITableViewController {
     
     private let defaultData = NSUserDefaults.standardUserDefaults()
     
-    private let dbURL = "http://wybren.haptotherapie-twente.nl/getData.php"
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
     override func viewDidLoad() {
@@ -38,13 +37,13 @@ class alertMessageTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.defaultData.valueForKey("Messages")!.count
+        return self.defaultData.valueForKey(dataMessages)!.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = "alertMessageTableViewCell"
-        let alertMessages = self.defaultData.valueForKey("Messages")!
+        let alertMessages = self.defaultData.valueForKey(dataMessages)!
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! alertMessageTableViewCell
 
         let messageTitle = alertMessages[indexPath.row].valueForKey("title") as! String
@@ -54,7 +53,8 @@ class alertMessageTableViewController: UITableViewController {
         return cell
     }
     
-
+    
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
