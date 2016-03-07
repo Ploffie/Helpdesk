@@ -9,8 +9,8 @@
 import Foundation
 
 // MARK: Database URL variables
-public let loginURL:String! = "http://wybren.haptotherapie-twente.nl/jsonlogin2"
-public let messageURL:String! = "http://wybren.haptotherapie-twente.nl/getData.php"
+public let loginURL:String! = "https://www.amerion.nl/app/api/getLogin.php"
+public let messageURL:String! = "https://www.amerion.nl/app/api/getData.php"
 
 // MARK: Alert message variables
 public let errorTitle:String! = "Inloggen mislukt"
@@ -31,6 +31,7 @@ public let dataUser:String! = "ID"
 public let dataOccupation:String! = "Occupation"
 public let dataSystem:String! = "System"
 public let dataMessages:String! = "Messages"
+public let dataMessageToDisplay:String! = "MessageToDisplay"
 
 // MARK: JSON Response constants (DO NOT CHANGE UNLESS CHANGED IN PHP)
 public let responseCompany:String! = "company"
@@ -39,6 +40,8 @@ public let responseOccupation:String! = "occupation"
 public let responseSystem:String! = "system"
 public let responseError:String! = "error_message"
 public let responseMessages:String! = "messages"
+public let responseTitle:String! = "title"
+public let responseMessage:String! = "message"
 
 // MARK: Request constants (DO NOT CHANGE UNLESS CHANGED IN PHP)
 public let requestUsername:String! = "username"
@@ -50,5 +53,6 @@ public let requestSystem:String! = "systemID"
 
 // MARK: Segue name and entry point variables
 public let gotoProtected:String! = "goto_protected"
+public let gotoInbox:String! = "goto_messages"
 public let entryProtected:String! = "protectedEntryPoint"
 public let entryUnprotected:String! = "unprotectedEntryPoint"

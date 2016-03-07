@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         response.valueForKey(responseOccupation) != nil &&
                         response.valueForKey(responseSystem) != nil) {
                             
-                            Alamofire.request(.POST, messageURL, parameters: [requestCompany: response.valueForKey(responseCompany)!, requestUser: response.valueForKey(responseUser)!, requestOccupation: response.valueForKey(responseOccupation)!, requestSystem: response.valueForKey(responseSystem)!])
+                            /*Alamofire.request(.POST, messageURL, parameters: [requestCompany: response.valueForKey(responseCompany)!, requestUser: response.valueForKey(responseUser)!, requestOccupation: response.valueForKey(responseOccupation)!, requestSystem: response.valueForKey(responseSystem)!])
                                 .responseJSON { response in switch response.result {
                                 case .Success(let JSON):
                                     // TODO: Check if error message
@@ -87,7 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                     debugPrint(response.request)
                                     break
                                     }
-                            }
+                            }*/
                             
                             self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
                             

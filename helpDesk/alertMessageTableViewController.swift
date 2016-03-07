@@ -39,7 +39,6 @@ class alertMessageTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.defaultData.valueForKey(dataMessages)!.count
     }
-
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = "alertMessageTableViewCell"
@@ -49,11 +48,14 @@ class alertMessageTableViewController: UITableViewController {
         let messageTitle = alertMessages[indexPath.row].valueForKey("title") as! String
         
         cell.titleLabel.text = messageTitle
+        
 
         return cell
     }
     
-    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.defaultData.setInteger(indexPath.row, forKey: dataMessageToDisplay)
+    }
     
     /*
     // Override to support conditional editing of the table view.

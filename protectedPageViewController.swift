@@ -14,6 +14,7 @@
  */
 
 import UIKit
+import Alamofire
 
 public class protectedPageViewController: UIViewController {
     
@@ -33,6 +34,25 @@ public class protectedPageViewController: UIViewController {
             menuButton.target = self.revealViewController()
             menuButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+        // MARK
+        Alamofire.request(.POST, messageURL, parameters: [requestCompany: self.defaultData.valueForKey(dataCompany)!,
+            requestUser: self.defaultData.valueForKey(dataUser)!,
+            requestOccupation: self.defaultData.valueForKey(dataOccupation)!,
+            requestSystem: self.defaultData.valueForKey(dataSystem)!])
+            .responseJSON { responseMessage in switch responseMessage.result {
+            case .Success(let JSON):
+                let response = JSON as! NSDictionary
+                print("success")
+                let responseMessageList = response.valueForKey(responseMessages)!
+                self.defaultData.setValue(responseMessageList, forKey: dataMessages)
+                break
+            case .Failure(_):
+                print("failure")
+                print("----------")
+                print(responseMessage.debugDescription)
+                break
+            }
         }
     }
     
@@ -55,7 +75,7 @@ public class protectedPageViewController: UIViewController {
     
     
     @IBAction func changePasswordButtonTapped(sender: AnyObject) {
-        self.presentViewController(Alert.create("Wachtwoord wijzigen", message: "Neem contact op met Amerion IT om uw wachtwoord te wijzigen."), animated: true, completion: nil)
+        self.presentViewController(Alert.create(changePasswordTitle, message: changePasswordMessage), animated: true, completion: nil)
     }
 
     public func handleLogout() -> Void {
@@ -67,6 +87,8 @@ public class protectedPageViewController: UIViewController {
         defaultData.removeObjectForKey(dataUser)
         defaultData.removeObjectForKey(dataOccupation)
         defaultData.removeObjectForKey(dataSystem)
+        defaultData.removeObjectForKey(dataMessages)
+        defaultData.removeObjectForKey(dataMessageToDisplay)
         return
     }
     

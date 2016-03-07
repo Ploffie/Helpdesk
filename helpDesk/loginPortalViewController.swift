@@ -189,20 +189,6 @@ public class loginPortalViewController: UIViewController {
                                 self.defaultData.setValue(response.valueForKey(responseOccupation)!, forKey: dataOccupation)
                                 self.defaultData.setValue(response.valueForKey(responseSystem)!, forKey: dataSystem)
                                 
-                                // MARK
-                                Alamofire.request(.POST, messageURL, parameters: [requestCompany: response.valueForKey(responseCompany)!, requestUser: response.valueForKey(responseUser)!, requestOccupation: response.valueForKey(responseOccupation)!, requestSystem: response.valueForKey(responseSystem)!])
-                                    .responseJSON { response in switch response.result {
-                                    case .Success(let JSON):
-                                        let response = JSON as! NSDictionary
-                                        let responseMessageList = response.valueForKey(responseMessages)!
-                                        self.defaultData.setValue(responseMessageList, forKey: dataMessages)
-                                        break
-                                    case .Failure(_):
-                                        debugPrint(response.request)
-                                        break
-                                    }
-                                }
-                                
                                 self.defaultData.synchronize()
                                 self.performSegueWithIdentifier(gotoProtected, sender: self)
                                 self.presentViewController(self.alertController, animated: true, completion: nil)
