@@ -148,6 +148,7 @@
 		86C9E5C61C12211D000B109E /* askForHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C9E5C51C12211D000B109E /* askForHelpViewController.swift */; };
 		86EE01E21BF8C9BF004BAFF5 /* protectedPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EE01E11BF8C9BF004BAFF5 /* protectedPageViewController.swift */; };
 		86EE01E41BF8CAB6004BAFF5 /* loginPortalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EE01E31BF8CAB6004BAFF5 /* loginPortalViewController.swift */; };
+		F41F8C9E1C8F287500E6E44F /* settingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41F8C9D1C8F287500E6E44F /* settingsTableViewController.swift */; };
 		F44976661C3FE306003249EE /* alertViewFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44976651C3FE306003249EE /* alertViewFunction.swift */; };
 		F46DE14D1C60B87F006378E3 /* alertMessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46DE14C1C60B87F006378E3 /* alertMessageTableViewController.swift */; };
 		F482B6451C7C63C20007B1AC /* alertMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F482B6441C7C63C20007B1AC /* alertMessageTableViewCell.swift */; };
@@ -446,6 +447,7 @@
 		86EE01E31BF8CAB6004BAFF5 /* loginPortalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginPortalViewController.swift; sourceTree = "<group>"; };
 		95E84377C3242EF109FBACC9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		995C6FD3B7162BE916BCC989 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F41F8C9D1C8F287500E6E44F /* settingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = settingsTableViewController.swift; path = ../settingsTableViewController.swift; sourceTree = "<group>"; };
 		F44976651C3FE306003249EE /* alertViewFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = alertViewFunction.swift; path = ../alertViewFunction.swift; sourceTree = "<group>"; };
 		F46DE14C1C60B87F006378E3 /* alertMessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = alertMessageTableViewController.swift; sourceTree = "<group>"; };
 		F482B6441C7C63C20007B1AC /* alertMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = alertMessageTableViewCell.swift; sourceTree = "<group>"; };
@@ -511,6 +513,7 @@
 				8640FBD41BEA7C65004EDEA5 /* SWRevealViewController */,
 				8640FBA61BEA7C5D004EDEA5 /* AppDelegate.swift */,
 				8640FBAA1BEA7C5D004EDEA5 /* Main.storyboard */,
+				F41F8C9D1C8F287500E6E44F /* settingsTableViewController.swift */,
 				F482B64A1C7F53AC0007B1AC /* alertMessageViewController.swift */,
 				F482B6461C7EE3790007B1AC /* variables.swift */,
 				F482B6441C7C63C20007B1AC /* alertMessageTableViewCell.swift */,
@@ -1174,6 +1177,7 @@
 				8640FBA71BEA7C5D004EDEA5 /* AppDelegate.swift in Sources */,
 				F44976661C3FE306003249EE /* alertViewFunction.swift in Sources */,
 				8640FBD81BEA7C86004EDEA5 /* SWRevealViewController.m in Sources */,
+				F41F8C9E1C8F287500E6E44F /* settingsTableViewController.swift in Sources */,
 				86EE01E41BF8CAB6004BAFF5 /* loginPortalViewController.swift in Sources */,
 				F482B64B1C7F53AC0007B1AC /* alertMessageViewController.swift in Sources */,
 				F482B6471C7EE3790007B1AC /* variables.swift in Sources */,

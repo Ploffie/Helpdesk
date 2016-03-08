@@ -6,13 +6,6 @@
 //  Copyright © 2015 Amerion IT. All rights reserved.
 //
 
-/*
- * TODO:
- *
- * Create public function to sign out
- * Use this function in protected table view sign out button
- */
-
 import UIKit
 import Alamofire
 
@@ -23,7 +16,6 @@ public class protectedPageViewController: UIViewController {
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var userNameLabel: UILabel!
     
-    let defaultData = NSUserDefaults.standardUserDefaults()
     let Alert = alertViewFunction()
     
     override public func viewDidLoad() {
@@ -35,17 +27,19 @@ public class protectedPageViewController: UIViewController {
             menuButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
+        
         // MARK
-        Alamofire.request(.POST, messageURL, parameters: [requestCompany: self.defaultData.valueForKey(dataCompany)!,
-            requestUser: self.defaultData.valueForKey(dataUser)!,
-            requestOccupation: self.defaultData.valueForKey(dataOccupation)!,
-            requestSystem: self.defaultData.valueForKey(dataSystem)!])
+        Alamofire.request(.POST, messageURL, parameters:
+            [requestCompany:defaultData.valueForKey(dataCompany)!,
+            requestUser: defaultData.valueForKey(dataUser)!,
+            requestOccupation: defaultData.valueForKey(dataOccupation)!,
+            requestSystem: defaultData.valueForKey(dataSystem)!])
             .responseJSON { responseMessage in switch responseMessage.result {
             case .Success(let JSON):
                 let response = JSON as! NSDictionary
-                print("success")
                 let responseMessageList = response.valueForKey(responseMessages)!
-                self.defaultData.setValue(responseMessageList, forKey: dataMessages)
+                defaultData.setValue(responseMessageList, forKey: dataMessages)
+                defaultData.synchronize()
                 break
             case .Failure(_):
                 print("failure")
@@ -65,7 +59,7 @@ public class protectedPageViewController: UIViewController {
     override public func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         
-        self.userNameLabel.text = ("Welkom, \(self.defaultData.valueForKey(dataUsername) as! String)!")
+        self.userNameLabel.text = ("Welkom, \(defaultData.valueForKey(dataUsername) as! String)!")
     }
     
     @IBAction func signOutTapped(sender: UIButton) {
@@ -81,14 +75,7 @@ public class protectedPageViewController: UIViewController {
     public func handleLogout() -> Void {
         let appDomain = NSBundle.mainBundle().bundleIdentifier
         NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
-        defaultData.removeObjectForKey(dataUsername)
-        defaultData.removeObjectForKey(dataPassword)
-        defaultData.removeObjectForKey(dataCompany)
-        defaultData.removeObjectForKey(dataUser)
-        defaultData.removeObjectForKey(dataOccupation)
-        defaultData.removeObjectForKey(dataSystem)
-        defaultData.removeObjectForKey(dataMessages)
-        defaultData.removeObjectForKey(dataMessageToDisplay)
+        deleteData()
         return
     }
     

@@ -6,12 +6,6 @@
 //  Copyright © 2015 Amerion IT. All rights reserved.
 //
 
-/*
- * TODO:
- *
- * Nothing so far
- */
-
 import UIKit
 
 class newsViewController: UIViewController {

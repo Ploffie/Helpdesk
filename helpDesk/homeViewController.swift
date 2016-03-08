@@ -6,12 +6,6 @@
 //  Copyright © 2015 Amerion IT. All rights reserved.
 //
 
-/*
- * TODO:
- *
- * Nothing so far
- */
-
 import UIKit
 
 class homeViewController: UIViewController {
@@ -24,8 +18,6 @@ class homeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        
         
         if self.revealViewController() != nil {
             menuButton.target = self.revealViewController()

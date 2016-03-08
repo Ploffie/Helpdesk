@@ -13,13 +13,11 @@ public class alertMessageViewController: UIViewController {
     @IBOutlet public weak var navigationBar: UINavigationItem!
     @IBOutlet var messageText: UITextView!
     
-    private let defaultData = NSUserDefaults.standardUserDefaults()
-    
     override public func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        let title = self.defaultData.valueForKey(dataMessages)![self.defaultData.integerForKey(dataMessageToDisplay)].valueForKey(responseTitle) as? String
-        let message = self.defaultData.valueForKey(dataMessages)![self.defaultData.integerForKey(dataMessageToDisplay)].valueForKey(responseMessage) as? String
+        let title = defaultData.valueForKey(dataMessages)![defaultData.integerForKey(dataMessageToDisplay)].valueForKey(responseTitle) as? String
+        let message = defaultData.valueForKey(dataMessages)![defaultData.integerForKey(dataMessageToDisplay)].valueForKey(responseMessage) as? String
         navigationBar.title = title
         messageText.text = message
     }

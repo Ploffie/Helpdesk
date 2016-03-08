@@ -6,12 +6,6 @@
 //  Copyright © 2015 Amerion IT. All rights reserved.
 //
 
-/*
- * TODO:
- *
- * Nothing so far
- */
-
 import UIKit
 import Alamofire
 
@@ -21,7 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Mostly programmed manually, apart from empty functions
 
     var window: UIWindow?
-    let defaultData = NSUserDefaults.standardUserDefaults()
     let log = loginPortalViewController()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -63,32 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         response.valueForKey(responseOccupation) != nil &&
                         response.valueForKey(responseSystem) != nil) {
                             
-                            /*Alamofire.request(.POST, messageURL, parameters: [requestCompany: response.valueForKey(responseCompany)!, requestUser: response.valueForKey(responseUser)!, requestOccupation: response.valueForKey(responseOccupation)!, requestSystem: response.valueForKey(responseSystem)!])
-                                .responseJSON { response in switch response.result {
-                                case .Success(let JSON):
-                                    // TODO: Check if error message
-                                    let response = JSON as! NSDictionary
-                                    if(response.valueForKey(responseError) != nil) {
-                                        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-                                        
-                                        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                                        let exampleViewController: SWRevealViewController = mainStoryboard.instantiateViewControllerWithIdentifier(entryUnprotected) as! SWRevealViewController
-                                        
-                                        self.window?.rootViewController = exampleViewController
-                                        self.window?.makeKeyAndVisible()
-                                        break
-                                    } else {
-                                        let responseMessageList = response.valueForKey(responseMessages)!
-                                        self.defaultData.setValue(responseMessageList, forKey: dataMessages)
-                                        break
-                                    }
-                                case .Failure(_):
-                                    // Handle failure
-                                    debugPrint(response.request)
-                                    break
-                                    }
-                            }*/
-                            
                             self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
                             
                             let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -96,8 +63,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             
                             self.window?.rootViewController = exampleViewController
                             self.window?.makeKeyAndVisible()
-                            
-                            self.defaultData.synchronize()
 
                             break
                             

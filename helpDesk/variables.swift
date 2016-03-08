@@ -21,8 +21,12 @@ public let registerTitle:String! = "Registreren"
 public let registerMessage:String! = "Neem contact op met Amerion IT om te registreren."
 public let changePasswordTitle:String! = "Wachtwoord wijzigen"
 public let changePasswordMessage:String! = "Neem contact op met Amerion IT om uw wachtwoord te wijzigen."
+public let deleteDataTitle:String! = "Gebruikersdata wissen"
+public let deleteDataQuestionMessage:String! = "Weet u zeker dat u wilt uitloggen en alle gebruikersdata wissen?"
+public let deleteDataYesMessage:String! = "Alle gebruikersdata op dit toestel is gewist en u bent uitgelogd."
 
 // MARK: Cache variables
+public let defaultData:NSUserDefaults! = NSUserDefaults.standardUserDefaults()
 public let dataUsername:String! = "Username"
 public let dataPassword:String! = "Password"
 public let dataCredentialsSaved:String! = "hasCredentialsSaved"
@@ -32,6 +36,7 @@ public let dataOccupation:String! = "Occupation"
 public let dataSystem:String! = "System"
 public let dataMessages:String! = "Messages"
 public let dataMessageToDisplay:String! = "MessageToDisplay"
+public let dataMessagesDeleted:String! = "doesDeleteMessages"
 
 // MARK: JSON Response constants (DO NOT CHANGE UNLESS CHANGED IN PHP)
 public let responseCompany:String! = "company"
@@ -56,3 +61,22 @@ public let gotoProtected:String! = "goto_protected"
 public let gotoInbox:String! = "goto_messages"
 public let entryProtected:String! = "protectedEntryPoint"
 public let entryUnprotected:String! = "unprotectedEntryPoint"
+
+//MARK: Functions
+public func saveData(username:AnyObject, password:AnyObject, company:AnyObject, user:AnyObject, occupation:AnyObject, system:AnyObject) -> Void {
+    defaultData.setValue(username, forKey: dataUsername)
+    defaultData.setValue(password, forKey: dataPassword)
+    
+    defaultData.setValue(company, forKey: dataCompany)
+    defaultData.setValue(user, forKey: dataUser)
+    defaultData.setValue(occupation, forKey: dataOccupation)
+    defaultData.setValue(system, forKey: dataSystem)
+    
+    defaultData.synchronize()
+}
+
+public func deleteData() -> Void {
+    for key in Array(defaultData.dictionaryRepresentation().keys) {
+        defaultData.removeObjectForKey(key)
+    }
+}

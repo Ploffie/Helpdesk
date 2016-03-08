@@ -14,14 +14,12 @@ public class loginPortalViewController: UIViewController {
     // All programmed
     
     private let Alert = alertViewFunction()
-    
     private let alertController = UIAlertController(title: savePasswordTitle, message: savePasswordMessage, preferredStyle: .Alert)
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var usernameTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
     
-    let defaultData = NSUserDefaults.standardUserDefaults()
     override public func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -64,37 +62,25 @@ public class loginPortalViewController: UIViewController {
                         response.valueForKey(responseOccupation) != nil &&
                         response.valueForKey(responseSystem) != nil) {
                             
-                            if(self.defaultData.objectForKey(dataCredentialsSaved) == nil) {
+                            if(defaultData.objectForKey(dataCredentialsSaved) == nil) {
                             
-                            let rememberPasswordAction = UIAlertAction(title: "Ja", style: UIAlertActionStyle.Default) {
-                                UIAlertAction in
-                                self.defaultData.setValue(username, forKey: dataUsername)
-                                self.defaultData.setValue(password, forKey: dataPassword)
+                            let rememberPasswordAction = UIAlertAction(title: "Ja", style: UIAlertActionStyle.Default) { UIAlertAction in
                                 
-                                self.defaultData.setBool(true, forKey: dataCredentialsSaved)
+                                saveData(username, password: password, company: response.valueForKey(responseCompany)!, user: response.valueForKey(responseUser)!, occupation: response.valueForKey(responseOccupation)!, system: response.valueForKey(responseSystem)!)
                                 
-                                self.defaultData.setValue(response.valueForKey(responseCompany)!, forKey: dataCompany)
-                                self.defaultData.setValue(response.valueForKey(responseUser)!, forKey: dataUser)
-                                self.defaultData.setValue(response.valueForKey(responseOccupation)!, forKey: dataOccupation)
-                                self.defaultData.setValue(response.valueForKey(responseSystem)!, forKey: dataSystem)
-                                
-                                self.defaultData.synchronize()
+                                defaultData.setBool(true, forKey: dataCredentialsSaved)
+
+                                defaultData.synchronize()
                                 self.performSegueWithIdentifier(gotoProtected, sender: self)
                             }
                             
                             let noRememberPasswordAction = UIAlertAction(title: "Nee", style: UIAlertActionStyle.Default) {
                                 UIAlertAction in
-                                self.defaultData.setValue(username, forKey: dataUsername)
-                                self.defaultData.setValue(password, forKey: dataPassword)
                                 
-                                self.defaultData.setBool(false, forKey: dataCredentialsSaved)
+                                saveData(username, password: password, company: response.valueForKey(responseCompany)!, user: response.valueForKey(responseUser)!, occupation: response.valueForKey(responseOccupation)!, system: response.valueForKey(responseSystem)!)
+                                defaultData.setBool(false, forKey: dataCredentialsSaved)
                                 
-                                self.defaultData.setValue(response.valueForKey(responseCompany)!, forKey: dataCompany)
-                                self.defaultData.setValue(response.valueForKey(responseUser)!, forKey: dataUser)
-                                self.defaultData.setValue(response.valueForKey(responseOccupation)!, forKey: dataOccupation)
-                                self.defaultData.setValue(response.valueForKey(responseSystem)!, forKey: dataSystem)
-                                
-                                self.defaultData.synchronize()
+                                defaultData.synchronize()
                                 self.performSegueWithIdentifier(gotoProtected, sender: self)
                             }
                             
@@ -104,15 +90,7 @@ public class loginPortalViewController: UIViewController {
                             self.presentViewController(self.alertController, animated: true, completion: nil)
                                 
                             } else {
-                                self.defaultData.setValue(username, forKey: dataUsername)
-                                self.defaultData.setValue(password, forKey: dataPassword)
-
-                                self.defaultData.setValue(response.valueForKey(responseCompany)!, forKey: dataCompany)
-                                self.defaultData.setValue(response.valueForKey(responseUser)!, forKey: dataUser)
-                                self.defaultData.setValue(response.valueForKey(responseOccupation)!, forKey: dataOccupation)
-                                self.defaultData.setValue(response.valueForKey(responseSystem)!, forKey: dataSystem)
-                                
-                                self.defaultData.synchronize()
+                                saveData(username, password: password, company: response.valueForKey(responseCompany)!, user: response.valueForKey(responseUser)!, occupation: response.valueForKey(responseOccupation)!, system: response.valueForKey(responseSystem)!)
                                 self.performSegueWithIdentifier(gotoProtected, sender: self)
                             }
                             
@@ -164,45 +142,35 @@ public class loginPortalViewController: UIViewController {
                         response.valueForKey(responseOccupation) != nil &&
                         response.valueForKey(responseSystem) != nil) {
                             
-                            if(self.defaultData.objectForKey(dataCredentialsSaved) == nil) {
+                            if(defaultData.objectForKey(dataCredentialsSaved) == nil) {
                                 
-                                let rememberPasswordAction = UIAlertAction(title: "Ja", style: UIAlertActionStyle.Default) {
-                                    UIAlertAction in
+                                let rememberPasswordAction = UIAlertAction(title: "Ja", style: UIAlertActionStyle.Default) { UIAlertAction in
                                     
-                                    self.defaultData.setBool(true, forKey: dataCredentialsSaved)
+                                    saveData(username, password: password, company: response.valueForKey(responseCompany)!, user: response.valueForKey(responseUser)!, occupation: response.valueForKey(responseOccupation)!, system: response.valueForKey(responseSystem)!)
+                                    
+                                    defaultData.setBool(true, forKey: dataCredentialsSaved)
+                                    
+                                    defaultData.synchronize()
+                                    self.performSegueWithIdentifier(gotoProtected, sender: self)
                                 }
                                 
                                 let noRememberPasswordAction = UIAlertAction(title: "Nee", style: UIAlertActionStyle.Default) {
                                     UIAlertAction in
                                     
-                                    self.defaultData.setBool(false, forKey: dataCredentialsSaved)
+                                    saveData(username, password: password, company: response.valueForKey(responseCompany)!, user: response.valueForKey(responseUser)!, occupation: response.valueForKey(responseOccupation)!, system: response.valueForKey(responseSystem)!)
+                                    defaultData.setBool(false, forKey: dataCredentialsSaved)
+                                    
+                                    defaultData.synchronize()
+                                    self.performSegueWithIdentifier(gotoProtected, sender: self)
                                 }
                                 
                                 self.alertController.addAction(noRememberPasswordAction)
                                 self.alertController.addAction(rememberPasswordAction)
                                 
-                                self.defaultData.setValue(username, forKey: dataUsername)
-                                self.defaultData.setValue(password, forKey: dataPassword)
-
-                                self.defaultData.setValue(response.valueForKey(responseCompany)!, forKey: dataCompany)
-                                self.defaultData.setValue(response.valueForKey(responseUser)!, forKey: dataUser)
-                                self.defaultData.setValue(response.valueForKey(responseOccupation)!, forKey: dataOccupation)
-                                self.defaultData.setValue(response.valueForKey(responseSystem)!, forKey: dataSystem)
-                                
-                                self.defaultData.synchronize()
-                                self.performSegueWithIdentifier(gotoProtected, sender: self)
                                 self.presentViewController(self.alertController, animated: true, completion: nil)
                                 
                             } else {
-                                self.defaultData.setValue(username, forKey: dataUsername)
-                                self.defaultData.setValue(password, forKey: dataPassword)
-                                
-                                self.defaultData.setValue(response.valueForKey(responseCompany)!, forKey: dataCompany)
-                                self.defaultData.setValue(response.valueForKey(responseUser)!, forKey: dataUser)
-                                self.defaultData.setValue(response.valueForKey(responseOccupation)!, forKey: dataOccupation)
-                                self.defaultData.setValue(response.valueForKey(responseSystem)!, forKey: dataSystem)
-                                
-                                self.defaultData.synchronize()
+                                saveData(username, password: password, company: response.valueForKey(responseCompany)!, user: response.valueForKey(responseUser)!, occupation: response.valueForKey(responseOccupation)!, system: response.valueForKey(responseSystem)!)
                                 self.performSegueWithIdentifier(gotoProtected, sender: self)
                             }
                             

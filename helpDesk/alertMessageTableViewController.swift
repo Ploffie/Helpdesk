@@ -10,9 +10,7 @@ import UIKit
 import Alamofire
 
 class alertMessageTableViewController: UITableViewController {
-    
-    private let defaultData = NSUserDefaults.standardUserDefaults()
-    
+        
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
     override func viewDidLoad() {
@@ -37,12 +35,12 @@ class alertMessageTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.defaultData.valueForKey(dataMessages)!.count
+        return defaultData.valueForKey(dataMessages)!.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = "alertMessageTableViewCell"
-        let alertMessages = self.defaultData.valueForKey(dataMessages)!
+        let alertMessages = defaultData.valueForKey(dataMessages)!
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! alertMessageTableViewCell
 
         let messageTitle = alertMessages[indexPath.row].valueForKey("title") as! String
@@ -54,7 +52,7 @@ class alertMessageTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.defaultData.setInteger(indexPath.row, forKey: dataMessageToDisplay)
+        defaultData.setInteger(indexPath.row, forKey: dataMessageToDisplay)
     }
     
     /*
