@@ -32,7 +32,6 @@ class settingsTableViewController: UITableViewController {
             UIAlertAction in
             deleteData()
             defaultData.removeObjectForKey(dataCredentialsSaved)
-            defaultData.removeObjectForKey(dataMessagesDeleted)
             self.presentViewController(self.confirmAlertController, animated: true, completion: nil)
         }
         

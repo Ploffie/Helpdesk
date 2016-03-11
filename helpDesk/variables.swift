@@ -36,7 +36,6 @@ public let dataOccupation:String! = "Occupation"
 public let dataSystem:String! = "System"
 public let dataMessages:String! = "Messages"
 public let dataMessageToDisplay:String! = "MessageToDisplay"
-public let dataMessagesDeleted:String! = "doesDeleteMessages"
 
 // MARK: JSON Response constants (DO NOT CHANGE UNLESS CHANGED IN PHP)
 public let responseCompany:String! = "company"

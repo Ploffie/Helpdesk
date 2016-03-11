@@ -11,8 +11,6 @@ import Alamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    // Mostly programmed manually, apart from empty functions
 
     var window: UIWindow?
     let log = loginPortalViewController()
